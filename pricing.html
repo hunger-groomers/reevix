@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - Reevix</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #ff0080 100%);
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --neon-blue: #00f5ff;
+            --neon-pink: #ff0080;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            animation: logoSpin 10s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--neon-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .page-content {
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        .section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+                transform: scale(1);
+            }
+            100% { 
+                filter: drop-shadow(0 0 50px rgba(102, 126, 234, 0.8));
+                transform: scale(1.02);
+            }
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+        .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+        .pricing-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent 60%);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--neon-blue);
+            background: rgba(0, 245, 255, 0.05);
+        }
+
+        .pricing-card.featured::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 8px 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            animation: priceGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes priceGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .plan-period {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 30px 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 100px 0 60px;
+            padding: 80px 40px;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 0, 128, 0.1), transparent);
+            animation: rotateCTA 15s linear infinite;
+        }
+
+        @keyframes rotateCTA {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.5);
+        }
+
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gradient);
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container, .section {
+                padding: 0 20px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">REEVIX</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="digital-marketing.html">Digital Marketing</a></li>
+                <li><a href="printing-production.html">Printing & Production</a></li>
+                <li><a href="3d-animation.html">3D & Animation</a></li>
+                <li><a href="pricing.html" class="active">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="section">
+            <h1 class="page-title">Pricing Plans</h1>
+            <p class="page-subtitle">Choose the perfect plan that fits your business needs and budget</p>
+            
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Basic</h3>
+                    <div class="plan-price">₹9,999<span style="font-size: 1.5rem; color: var(--text-secondary);">/month</span></div>
+                    <p class="plan-period">Perfect for startups and small businesses</p>
+                    
+                    <ul class="plan-features">
+                        <li>Social media management (up to 12 posts)</li>
+                        <li>Content creation & scheduling</li>
+                        <li>Ad campaign setup</li>
+                        <li>Creative design + audience targeting</li>
+                        <li>Starter website design (template-based)</li>
+                        <li>Professional logo design</li>
+                        <li>Product packaging mockup</li>
+                        <li>Custom infographic design</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+
+                <!-- Growth Plan -->
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">Growth</h3>
+                    <div class="plan-price">₹14,999<span style="font-size: 1.5rem; color: var(--text-secondary);">/month</span></div>
+                    <p class="plan-period">Ideal for growing businesses</p>
+                    
+                    <ul class="plan-features">
+                        <li>Everything in Basic, plus:</li>
+                        <li>+12 extra social posts (24 total)</li>
+                        <li>4 Instagram/Facebook Stories or Reels</li>
+                        <li>Email drip campaign (2 emails)</li>
+                        <li>Monthly performance report</li>
+                        <li>30-min strategy call</li>
+                        <li>Up to 2 product packaging mockups</li>
+                        <li>Priority support</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary">Most Popular</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="plan-price">₹24,999<span style="font-size: 1.5rem; color: var(--text-secondary);">/month</span></div>
+                    <p class="plan-period">For established businesses seeking maximum growth</p>
+                    
+                    <ul class="plan-features">
+                        <li>Everything in Growth, plus:</li>
+                        <li>4 high-production short videos (15-30 sec)</li>
+                        <li>Ads management & ₹10,000 media spend coordination</li>
+                        <li>Dedicated account manager</li>
+                        <li>Bi-weekly strategy calls</li>
+                        <li>Priority support 24/7</li>
+                        <li>Advanced analytics and reporting</li>
+                        <li>Competitor analysis</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary">Go Premium</button>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Need a Custom Plan?</h2>
+                <p>Every business is unique. Let's create a personalized package that perfectly fits your needs and budget.</p>
+                <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'd%20like%20to%20discuss%20a%20custom%20pricing%20plan%20for%20my%20business." class="whatsapp-btn" target="_blank">
+                    <span style="font-size: 1.5rem;">📱</span> Discuss Custom Plan
+                </a>
+                <div style="margin-top: 50px; position: relative; z-index: 1;">
+                    <p style="font-size: 1.1rem; margin-bottom: 15px; color: var(--text-secondary);"><strong>📧 Email:</strong> <a href="mailto:reevix.in@gmail.com" style="color: var(--neon-blue); text-decoration: none;">reevix.in@gmail.com</a></p>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary);"><strong>📞 Call:</strong> 
+                        <a href="tel:+917878466866" style="color: var(--neon-blue); text-decoration: none;">+91 7878466866</a> | 
+                        <a href="tel:+918619891911" style="color: var(--neon-blue); text-decoration: none;">+91 8619891911</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">REEVIX</div>
+        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
+        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 15px ${randomColor}`;
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
+                const planPrice = this.closest('.pricing-card').querySelector('.plan-price').textContent;
+                const whatsappMessage = `Hi Reevix! I'm interested in the ${planName} plan (${planPrice}). Can you provide more details?`;
+                const whatsappUrl = `https://wa.me/+917878466866?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
