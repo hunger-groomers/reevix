@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animation & Mockups - Reevix</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #ff0080 100%);
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --neon-blue: #00f5ff;
+            --neon-pink: #ff0080;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            animation: logoSpin 10s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--neon-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .page-content {
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        .section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+                transform: scale(1);
+            }
+            100% { 
+                filter: drop-shadow(0 0 50px rgba(102, 126, 234, 0.8));
+                transform: scale(1.02);
+            }
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 30px;
+            padding: 60px;
+            margin: 60px 0;
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent);
+            animation: rotateCTA 15s linear infinite;
+        }
+
+        @keyframes rotateCTA {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .highlight-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .benefit-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .price-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .price-card:nth-child(1) { animation-delay: 0.1s; }
+        .price-card:nth-child(2) { animation-delay: 0.2s; }
+        .price-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--neon-pink);
+            background: rgba(255, 0, 128, 0.08);
+        }
+
+        .price-card.featured::after {
+            content: '✨ BEST VALUE';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .price-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .price-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .price-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            animation: priceGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes priceGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .price-card p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .service-list li {
+            padding: 10px 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .service-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.5);
+        }
+
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gradient);
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container, .section {
+                padding: 0 20px;
+            }
+            
+            .highlight-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">REEVIX</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="digital-marketing.html">Digital Marketing</a></li>
+                <li><a href="printing-production.html">Printing & Production</a></li>
+                <li><a href="3d-animation.html" class="active">3D & Animation</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="section">
+            <h1 class="page-title">3D Animation & Product Mockups</h1>
+            <p class="page-subtitle">Elevate your brand with dynamic 3D clips and photorealistic product mockups—perfect for social media, ads, and in-store visuals</p>
+            
+            <div class="highlight-box">
+                <h2>Why Choose 3D Animation & Mockups?</h2>
+                <p>Stand out in crowded feeds with smooth motion graphics and polished visualizations that capture immediate attention</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚡</div>
+                        <h4>Attention Grabbing</h4>
+                        <p>Stand out in crowded feeds with smooth motion and polished mockups</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <h4>Versatile Usage</h4>
+                        <p>Perfect for social reels, website banners, digital signage, and packaging previews</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🚀</div>
+                        <h4>No Photo Shoot Needed</h4>
+                        <p>All work created digitally—fast turnaround, consistent quality, no scheduling headaches</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💎</div>
+                        <h4>Photorealistic Quality</h4>
+                        <p>High-resolution outputs that look indistinguishable from real photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin: 80px 0 40px; color: var(--text-primary);">What You Get</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎬</div>
+                    <h4>15-20 sec 3D Animation</h4>
+                    <p>Professional animated clips with smooth transitions and eye-catching effects</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📸</div>
+                    <h4>Photorealistic Mockups</h4>
+                    <p>High-resolution PNG mockups that look like real product photography</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h4>Two Rounds of Revisions</h4>
+                    <p>Fine-tune assets until they perfectly match your vision</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h4>HD Exports</h4>
+                    <p>MP4/WebM for videos + PNG for mockups, optimized for all platforms</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin: 80px 0 40px; color: var(--text-primary);">Pricing Options</h2>
+            
+            <div class="pricing-options">
+                <div class="price-card">
+                    <h3>3D Animation Clip</h3>
+                    <div class="price">₹20,000</div>
+                    <p style="margin-bottom: 30px;">Professional 3D animated video</p>
+                    <ul class="service-list">
+                        <li>15-20 second duration</li>
+                        <li>Custom animation</li>
+                        <li>Smooth transitions</li>
+                        <li>HD export (MP4/WebM)</li>
+                        <li>Two rounds of revisions</li>
+                        <li>Optimized for social media</li>
+                    </ul>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Order Now</button>
+                </div>
+
+                <div class="price-card">
+                    <h3>Product Mockup</h3>
+                    <div class="price">₹5,000</div>
+                    <p style="margin-bottom: 30px;">Photorealistic product visualization</p>
+                    <ul class="service-list">
+                        <li>1 product mockup</li>
+                        <li>Photorealistic rendering</li>
+                        <li>High-resolution PNG</li>
+                        <li>Custom backgrounds</li>
+                        <li>Two rounds of revisions</li>
+                        <li>Print-ready quality</li>
+                    </ul>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Order Now</button>
+                </div>
+
+                <div class="price-card featured">
+                    <h3>Bundle Deal</h3>
+                    <div class="price">₹22,499</div>
+                    <p style="color: var(--neon-pink); font-weight: 600; margin-bottom: 10px;">Save ₹2,501!</p>
+                    <p style="margin-bottom: 30px;">Animation + Mockup package</p>
+                    <ul class="service-list">
+                        <li>1× 15-20 sec 3D animation</li>
+                        <li>1× Photorealistic mockup</li>
+                        <li>HD exports for both</li>
+                        <li>Two rounds of revisions each</li>
+                        <li>Priority support</li>
+                        <li>Fastest turnaround</li>
+                    </ul>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Get Bundle</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 80px 0;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 30px; color: var(--text-primary);">Ready to Create Something Amazing?</h2>
+                <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 40px;">Contact us to discuss your 3D animation and mockup needs</p>
+                <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'm%20interested%20in%20your%203D%20animation%20and%20mockup%20services." class="whatsapp-btn" target="_blank">
+                    <span style="font-size: 1.5rem;">📱</span> Chat on WhatsApp
+                </a>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.1rem; margin-bottom: 15px; color: var(--text-secondary);"><strong>📧 Email:</strong> <a href="mailto:reevix.in@gmail.com" style="color: var(--neon-blue); text-decoration: none;">reevix.in@gmail.com</a></p>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary);"><strong>📞 Call:</strong> 
+                        <a href="tel:+917878466866" style="color: var(--neon-blue); text-decoration: none;">+91 7878466866</a> | 
+                        <a href="tel:+918619891911" style="color: var(--neon-blue); text-decoration: none;">+91 8619891911</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">REEVIX</div>
+        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
+        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 15px ${randomColor}`;
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceName = this.closest('.price-card').querySelector('h3').textContent;
+                const price = this.closest('.price-card').querySelector('.price').textContent;
+                const whatsappMessage = `Hi Reevix! I'm interested in your ${serviceName} (${price}). Can you provide more details?`;
+                const whatsappUrl = `https://wa.me/+917878466866?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
