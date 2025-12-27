@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Portfolio - Reevix</title>
+    <title>Reevix - Digital Marketing & Production Excellence</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
@@ -112,6 +112,8 @@
             background-clip: text;
             letter-spacing: 2px;
             cursor: pointer;
+            position: relative;
+            text-decoration: none;
         }
 
         .logo::before {
@@ -213,42 +215,109 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .portfolio-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 40px;
-            margin-top: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
 
-        .portfolio-item {
+        .stat-item {
+            text-align: center;
+            padding: 40px 30px;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            animation: fadeInScale 0.6s ease-out backwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.1s; }
+        .stat-item:nth-child(2) { animation-delay: 0.2s; }
+        .stat-item:nth-child(3) { animation-delay: 0.3s; }
+        .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .stat-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            overflow: hidden;
+            padding: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            animation: slideUp 0.6s ease-out backwards;
+            overflow: hidden;
             cursor: pointer;
+            animation: slideUp 0.6s ease-out backwards;
         }
 
-        .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
-        .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
-        .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
-        .portfolio-item:nth-child(4) { animation-delay: 0.4s; }
-        .portfolio-item:nth-child(5) { animation-delay: 0.5s; }
-        .portfolio-item:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .portfolio-item::before {
+        .service-card::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -258,78 +327,160 @@
             background: radial-gradient(circle, rgba(0, 245, 255, 0.15), transparent 60%);
             opacity: 0;
             transition: all 0.6s ease;
-            pointer-events: none;
+            transform: scale(0);
         }
 
-        .portfolio-item:hover::before {
+        .service-card:hover::before {
             opacity: 1;
-            animation: rotate 4s linear infinite;
+            transform: scale(1) rotate(45deg);
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
             border-color: rgba(0, 245, 255, 0.4);
         }
 
-        .portfolio-image-container {
-            width: 100%;
-            height: 600px;
-            overflow: hidden;
-            position: relative;
-            background: #1a1a1a;
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
             display: block;
             transition: transform 0.4s ease;
         }
 
-        .portfolio-item:hover .portfolio-image {
-            transform: scale(1.05);
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotateY(360deg);
         }
 
-        .portfolio-content {
-            padding: 30px;
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
             z-index: 1;
         }
 
-        .portfolio-category {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--accent-gradient);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .portfolio-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-
-        .portfolio-description {
+        .service-card p {
             color: var(--text-secondary);
             line-height: 1.8;
-            font-size: 1.05rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+
+        .portfolio-preview {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px 40px;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-preview::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1), transparent);
+            animation: rotateCTA 20s linear infinite;
+        }
+
+        @keyframes rotateCTA {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .portfolio-preview h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-preview p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section {
             text-align: center;
-            margin: 100px 0 60px;
+            margin: 100px 0;
             padding: 80px 40px;
             background: var(--glass-bg);
             border-radius: 30px;
@@ -350,11 +501,6 @@
             animation: rotateCTA 15s linear infinite;
         }
 
-        @keyframes rotateCTA {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         .cta-section h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
@@ -369,31 +515,8 @@
         .cta-section p {
             color: var(--text-secondary);
             font-size: 1.2rem;
-            margin-bottom: 40px;
             position: relative;
             z-index: 1;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 18px 40px;
-            background: var(--accent-gradient);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.15rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
         }
 
         .footer {
@@ -401,6 +524,7 @@
             padding: 40px;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
         }
 
         .footer-logo {
@@ -411,70 +535,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            padding: 20px;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            max-width: 95%;
-            max-height: 95vh;
-            position: relative;
-            animation: zoomIn 0.3s ease;
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .lightbox-image {
-            max-width: 100%;
-            max-height: 95vh;
-            border-radius: 16px;
-            box-shadow: 0 20px 100px rgba(0, 0, 0, 0.8);
-            object-fit: contain;
-        }
-
-        .lightbox-close {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            z-index: 10001;
-        }
-
-        .lightbox-close:hover {
-            transform: rotate(90deg) scale(1.1);
-            background: rgba(255, 0, 128, 0.8);
-            border-color: var(--neon-pink);
         }
 
         ::-webkit-scrollbar {
@@ -491,29 +551,24 @@
         }
 
         @media (max-width: 768px) {
-            .nav-container, .section {
+            .nav-container {
                 padding: 0 20px;
             }
 
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .nav-links {
+                display: none;
             }
 
-            .portfolio-image-container {
-                height: 500px;
-            }
-
-            .cta-section {
+            .section {
                 padding: 40px 20px;
             }
 
-            .lightbox-close {
-                top: 10px;
-                right: 10px;
-                width: 50px;
-                height: 50px;
-                font-size: 2rem;
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -526,11 +581,10 @@
         <div class="nav-container">
             <a href="index.html" class="logo">REEVIX</a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="digital-marketing.html">Digital Marketing</a></li>
                 <li><a href="printing-production.html">Printing & Production</a></li>
                 <li><a href="3d-animation.html">3D & Animation</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -539,107 +593,125 @@
 
     <div class="page-content">
         <div class="section">
-            <h1 class="page-title">Our Portfolio</h1>
-            <p class="page-subtitle">Explore our creative work - from social media campaigns to community engagement posters. Click any image to view in full size!</p>
+            <h1 class="page-title">REEVIX</h1>
+            <p class="page-subtitle">The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
             
-            <div class="portfolio-grid">
-                <!-- Image 1: Sip Jam Read -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/gjW9DwRN/image1.jpg" 
-                             alt="Sip Jam Read" class="portfolio-image">
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">LIFESTYLE BRAND</span>
-                        <h3 class="portfolio-title">Sip, Jam, Read</h3>
-                        <p class="portfolio-description">Modern lifestyle poster featuring books in spotlight with inspiring Stephen King quote. Perfect for bookstores, cafes, and literary spaces combining reading culture with community engagement.</p>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <div>Services Offered</div>
                 </div>
-
-                <!-- Image 2: Read Sip Coffee -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/fWZjYFJP/image2.jpg" 
-                             alt="Read Sip Coffee" class="portfolio-image">
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">CAFE ENGAGEMENT</span>
-                        <h3 class="portfolio-title">Read, Sip, Coffee</h3>
-                        <p class="portfolio-description">Stylish engagement poster for bookstores with café spaces. Features books, beverages, and inviting atmosphere. Includes call-to-action to join and avail offers for customer engagement.</p>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <div>Support Available</div>
                 </div>
-
-                <!-- Image 3: Showcase Event -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/02WbRXfJ/image3.jpg" 
-                             alt="Showcase Event Poster" class="portfolio-image">
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">COMMUNITY ENGAGEMENT</span>
-                        <h3 class="portfolio-title">Showcase Event Poster</h3>
-                        <p class="portfolio-description">Dynamic poster design for community talent showcase events. Features dramatic spotlight effect with microphone and stage setup to create intrigue and draw attention to performance venues.</p>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div>Custom Solutions</div>
                 </div>
-
-                <!-- Image 4: Read The Caption -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/wx9wCcJv/image4.jpg" 
-                             alt="Interactive Caption Post" class="portfolio-image">
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">SOCIAL ENGAGEMENT</span>
-                        <h3 class="portfolio-title">Interactive Caption Post</h3>
-                        <p class="portfolio-description">Clever engagement-focused social media design that creates curiosity and encourages audience interaction. Features playful commentary bubbles to drive comments, shares, and boost engagement rates.</p>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number">Fast</span>
+                    <div>Delivery Guaranteed</div>
                 </div>
+            </div>
 
-                <!-- Image 5: Work Life Balance -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/sDT6Sfs0/image5.jpg" 
-                             alt="Work-Life Balance Post" class="portfolio-image">
+            <div style="text-align: center; margin-top: 80px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 40px; color: var(--text-primary);">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-icon">💻</span>
+                        <h3>Digital Marketing</h3>
+                        <p>Complete social media management, ad campaigns, website design, and brand identity solutions.</p>
+                        <a href="digital-marketing.html" class="btn btn-primary" style="margin-top: 20px;">Explore Digital →</a>
                     </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">DAILY CONTENT</span>
-                        <h3 class="portfolio-title">Work-Life Balance Post</h3>
-                        <p class="portfolio-description">Minimalist daily social media content with thought-provoking messaging. Features clever visual metaphor with Ctrl key representing balance. Perfect for consistent brand presence and inspiring followers.</p>
+                    
+                    <div class="service-card">
+                        <span class="service-icon">🖨️</span>
+                        <h3>Printing & Production</h3>
+                        <p>Professional packaging, banners, light boards, signage, and all your printing needs.</p>
+                        <a href="printing-production.html" class="btn btn-primary" style="margin-top: 20px;">Explore Production →</a>
                     </div>
-                </div>
-
-                <!-- Image 6: Coffee Spotlight -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image-container" onclick="openLightbox(this.querySelector('img').src)">
-                        <img src="https://i.postimg.cc/HL99c18y/image6.jpg" 
-                             alt="Coffee Spotlight" class="portfolio-image">
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-category">PRODUCT PROMOTION</span>
-                        <h3 class="portfolio-title">Coffee in the Spotlight</h3>
-                        <p class="portfolio-description">Eye-catching product promotional design featuring coffee and snacks under dramatic spotlight. Bold typography with textured effects creates premium feel for café menus and social media campaigns.</p>
+                    
+                    <div class="service-card">
+                        <span class="service-icon">🎬</span>
+                        <h3>3D & Animation</h3>
+                        <p>Stunning 3D animations, product mockups, and photorealistic visualizations.</p>
+                        <a href="3d-animation.html" class="btn btn-primary" style="margin-top: 20px;">Explore 3D →</a>
                     </div>
                 </div>
             </div>
 
+            <div class="portfolio-preview">
+                <h2>✨ View Our Creative Work</h2>
+                <p>Explore our portfolio of social media campaigns, engagement posters, and creative designs that drive results.</p>
+                <a href="portfolio.html" class="btn btn-primary" style="position: relative; z-index: 1;">Browse Portfolio →</a>
+            </div>
+
             <div class="cta-section">
-                <h2>Ready to Start Your Project?</h2>
-                <p>Let's create something amazing together. Get in touch today!</p>
-                <a href="#contact" class="btn-primary">Get Started</a>
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Let's create something amazing together. Get started with Reevix today!</p>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px; flex-wrap: wrap; position: relative; z-index: 1;">
+                    <a href="pricing.html" class="btn btn-primary">View Pricing</a>
+                    <a href="contact.html" class="btn btn-secondary">Get In Touch</a>
+                </div>
             </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="footer-logo">REEVIX</div>
-        <p style="color: var(--text-secondary); margin-top: 10px;">© 2024 Reevix Studios. All rights reserved.</p>
+        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
+        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
     </footer>
 
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">×</span>
-        <div class="lightbox-content">
-            <img src="" alt="Portfolio Image" class="lightbox-image" id="lightboxImage">
-        </div>
-    </div>
-
     <script>
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 15px ${randomColor}`;
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
