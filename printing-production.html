@@ -1,744 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printing & Production Services - Reevix</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Printing & Production — REEVIX</title>
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #ff0080 100%);
-            --dark-bg: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --neon-blue: #00f5ff;
-            --neon-pink: #ff0080;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
-            animation: backgroundFloat 20s ease-in-out infinite;
-        }
+html, body {
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  scroll-behavior: smooth;
+}
 
-        @keyframes backgroundFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
-        }
+/* ================= NAVBAR (EXACT MATCH TO INDEX.HTML) ================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
 
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
+.navbar.scrolled {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            opacity: 0;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(100px) rotate(360deg); opacity: 0; }
-        }
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1f4fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+.logo:hover {
+  transform: scale(1.05);
+}
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            cursor: pointer;
-            position: relative;
-        }
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #222;
+  cursor: pointer;
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
 
-        .logo::before {
-            content: '';
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            animation: logoSpin 10s linear infinite;
-        }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1f4fff;
+  transition: width 0.3s ease;
+}
 
-        @keyframes logoSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+.nav-links a:hover {
+  color: #1f4fff;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--neon-blue);
-        }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1563906267088-b029e7101114?w=1200") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            transition: width 0.3s ease;
-        }
+@media (max-width: 900px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+}
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 79, 255, 0.25),
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
 
-        .page-content {
-            min-height: 100vh;
-            padding-top: 120px;
-        }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 900px;
+}
 
-        .section {
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: #1f4fff;
+  text-shadow: 0 4px 20px rgba(31, 79, 255, 0.3);
+  margin-bottom: 24px;
+}
 
-        .page-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
+.hero p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #222;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-        @keyframes titleGlow {
-            0% { 
-                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
-                transform: scale(1);
-            }
-            100% { 
-                filter: drop-shadow(0 0 50px rgba(102, 126, 234, 0.8));
-                transform: scale(1.02);
-            }
-        }
+.btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 40px;
+  background: #1f4fff;
+  color: #fff;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
 
-        .page-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.3rem;
-            margin-bottom: 60px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out;
-        }
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.btn:hover::before {
+  left: 100%;
+}
 
-        .production-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(31,79,255,0.4);
+}
 
-        .production-item {
-            background: var(--glass-bg);
-            border-radius: 24px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.6s ease-out backwards;
-        }
+/* ================= SECTIONS ================= */
+.section {
+  padding: 120px 20px;
+  background: #ffffff;
+  position: relative;
+}
 
-        .production-item:nth-child(1) { animation-delay: 0.1s; }
-        .production-item:nth-child(2) { animation-delay: 0.2s; }
-        .production-item:nth-child(3) { animation-delay: 0.3s; }
-        .production-item:nth-child(4) { animation-delay: 0.4s; }
-        .production-item:nth-child(5) { animation-delay: 0.5s; }
-        .production-item:nth-child(6) { animation-delay: 0.6s; }
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.reveal {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        .production-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 0, 128, 0.15), transparent 60%);
-            opacity: 0;
-            transition: all 0.6s ease;
-            transform: scale(0);
-        }
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        .production-item:hover::before {
-            opacity: 1;
-            transform: scale(1) rotate(45deg);
-        }
+.section-title {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #1f4fff;
+  margin-bottom: 20px;
+}
 
-        .production-item:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 0, 128, 0.4);
-        }
+.section-description {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 70px;
+  color: #666;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
 
-        .production-icon {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            transition: transform 0.4s ease;
-            display: inline-block;
-        }
+/* ================= SERVICES GRID ================= */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+}
 
-        .production-item:hover .production-icon {
-            transform: scale(1.2) rotateY(360deg);
-        }
+.service-card {
+  padding: 50px 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.05) 0%, rgba(255, 217, 61, 0.05) 100%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
+}
 
-        .production-item h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-            position: relative;
-            z-index: 1;
-        }
+.service-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  box-shadow: 0 25px 70px rgba(31, 79, 255, 0.35);
+  border-color: rgba(255,255,255,0.2);
+}
 
-        .production-item p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
+.service-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  display: block;
+  transition: all 0.5s ease;
+}
 
-        .production-item .price {
-            font-size: 2rem;
-            font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 20px 0;
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            animation: priceGlow 2s ease-in-out infinite;
-        }
+.service-card:hover .service-icon {
+  transform: scale(1.15);
+}
 
-        @keyframes priceGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+.service-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  color: #111;
+  font-weight: 700;
+  transition: all 0.5s ease;
+}
 
-        .service-features {
-            list-style: none;
-            margin: 20px 0;
-            text-align: left;
-            position: relative;
-            z-index: 1;
-        }
+.service-card:hover h3 {
+  color: #ffffff;
+}
 
-        .service-features li {
-            padding: 8px 0;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 25px;
-        }
+.service-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  transition: all 0.5s ease;
+  margin-bottom: 16px;
+}
 
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--neon-blue);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
+.service-card:hover p {
+  color: rgba(255,255,255,0.95);
+}
 
-        .btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
+.service-card .price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f4fff;
+  margin: 16px 0;
+  display: block;
+  transition: all 0.5s ease;
+}
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: -1;
-        }
+.service-card:hover .price {
+  color: #FFD93D;
+}
 
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
+.service-features {
+  list-style: none;
+  margin: 20px 0;
+  text-align: left;
+}
 
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-        }
+.service-features li {
+  padding: 6px 0;
+  color: #666;
+  position: relative;
+  padding-left: 25px;
+  font-size: 0.95rem;
+  transition: all 0.5s ease;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
-        }
+.service-card:hover .service-features li {
+  color: rgba(255,255,255,0.9);
+}
 
-        .contact-box {
-            background: var(--glass-bg);
-            border-radius: 24px;
-            padding: 60px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
+.service-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #1f4fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.5s ease;
+}
 
-        .contact-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent);
-            animation: rotateCTA 15s linear infinite;
-        }
+.service-card:hover .service-features li::before {
+  color: #FFD93D;
+}
 
-        @keyframes rotateCTA {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+.service-card .btn {
+  margin-top: 20px;
+  padding: 12px 32px;
+  font-size: 0.95rem;
+  background: #1f4fff;
+}
 
-        .contact-box h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
+.service-card:hover .btn {
+  background: #ffffff;
+  color: #1f4fff;
+}
 
-        .contact-box p {
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
+/* ================= PARALLAX TEXT ================= */
+.parallax-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  overflow: hidden;
+  position: relative;
+}
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-            position: relative;
-            z-index: 1;
-        }
+.parallax-text {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.15;
+  letter-spacing: -0.05em;
+}
 
-        .whatsapp-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.5);
-        }
+/* ================= CTA ================= */
+.cta-section {
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-        .footer {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 80px;
-        }
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: pulse 8s ease-in-out infinite;
+}
 
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-        }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+}
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+.cta-section h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
+}
 
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
+.cta-section p {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 1;
+}
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
-            border-radius: 5px;
-        }
+.cta-section .btn {
+  background: #ffffff;
+  color: #1f4fff;
+  position: relative;
+  z-index: 1;
+}
 
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 20px;
-            }
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #25d366;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin: 10px;
+  position: relative;
+  z-index: 1;
+}
 
-            .section {
-                padding: 40px 20px;
-            }
+.whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+}
 
-            .contact-box {
-                padding: 40px 20px;
-            }
-        }
-    </style>
+.contact-info {
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-info p {
+  font-size: 1.05rem;
+  margin: 10px 0;
+}
+
+.contact-info a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #FFD93D;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .section {
+    padding: 80px 20px;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding-top: 60px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .parallax-text {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .parallax-text {
+    font-size: 3rem;
+  }
+
+  .whatsapp-btn {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+}
+</style>
 </head>
+
 <body>
-    <div class="background-animation"></div>
-    <div class="particles" id="particles"></div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo" onclick="window.location.href='index.html'">REEVIX</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="digital-marketing.html">Digital Marketing</a></li>
-                <li><a href="printing-production.html" class="active">Printing & Production</a></li>
-                <li><a href="3d-animation.html">3D & Animation</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<!-- NAVBAR - EXACT MATCH TO INDEX.HTML -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">REEVIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="digital-marketing.html">Digital</a></li>
+      <li><a href="printing-production.html">Printing</a></li>
+      <li><a href="3d-animation.html">3D</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="page-content">
-        <div class="section">
-            <h1 class="page-title">Printing & Production</h1>
-            <p class="page-subtitle">Professional printing and production services for all your business needs - from packaging to signage</p>
-            
-            <div class="production-showcase">
-                <div class="production-item">
-                    <div class="production-icon">📦</div>
-                    <h3>Product Packaging</h3>
-                    <p>Custom packaging design and production that makes your products stand out on the shelf</p>
-                    <div class="price">Starting at ₹15,000</div>
-                    <ul class="service-features">
-                        <li>Custom box design & prototyping</li>
-                        <li>Professional label printing</li>
-                        <li>Material selection & sourcing</li>
-                        <li>Bulk production available</li>
-                        <li>Eco-friendly options</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <h1>Printing & Production</h1>
+    <p>Professional printing and production services for all your business needs — from packaging to signage, we bring your brand to life in the physical world.</p>
+    <a class="btn" href="#services">Explore Services</a>
+  </div>
+</section>
 
-                <div class="production-item">
-                    <div class="production-icon">🏳️</div>
-                    <h3>Banners & Signage</h3>
-                    <p>Eye-catching indoor and outdoor advertising materials built to last</p>
-                    <div class="price">Starting at ₹22/sq.ft</div>
-                    <ul class="service-features">
-                        <li>Flex banners (indoor/outdoor)</li>
-                        <li>Vinyl printing & lettering</li>
-                        <li>Mesh banners for windy areas</li>
-                        <li>Weather-resistant materials</li>
-                        <li>Installation available</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+<!-- SERVICES -->
+<section class="section reveal" id="services">
+  <div class="container">
+    <h2 class="section-title">Our Printing Services</h2>
+    <p class="section-description">High-quality production solutions designed to make your brand stand out</p>
 
-                <div class="production-item">
-                    <div class="production-icon">💡</div>
-                    <h3>Light Boards & LED Signs</h3>
-                    <p>Illuminated signage for maximum visibility day and night</p>
-                    <div class="price">Starting at ₹8,000</div>
-                    <ul class="service-features">
-                        <li>LED backlit boards</li>
-                        <li>Custom neon signs</li>
-                        <li>Acrylic light boxes</li>
-                        <li>Energy-efficient LEDs</li>
-                        <li>Remote control options</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">📦</span>
+        <h3>Product Packaging</h3>
+        <p>Custom packaging design and production that makes your products stand out on the shelf</p>
+        <span class="price">Starting at ₹15,000</span>
+        <ul class="service-features">
+          <li>Custom box design & prototyping</li>
+          <li>Professional label printing</li>
+          <li>Material selection & sourcing</li>
+          <li>Bulk production available</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Product Packaging', '₹15,000')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">📋</div>
-                    <h3>Business Stationery</h3>
-                    <p>Professional printed materials that make a lasting impression</p>
-                    <div class="price">Starting at ₹200</div>
-                    <ul class="service-features">
-                        <li>Premium business cards</li>
-                        <li>Letterheads & envelopes</li>
-                        <li>Brochures & flyers</li>
-                        <li>Company folders</li>
-                        <li>Various paper stocks</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+      <div class="service-card">
+        <span class="service-icon">🏳️</span>
+        <h3>Banners & Signage</h3>
+        <p>Eye-catching indoor and outdoor advertising materials built to last</p>
+        <span class="price">Starting at ₹22/sq.ft</span>
+        <ul class="service-features">
+          <li>Flex banners (indoor/outdoor)</li>
+          <li>Vinyl printing & lettering</li>
+          <li>Weather-resistant materials</li>
+          <li>Installation available</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Banners & Signage', '₹22/sq.ft')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">🎪</div>
-                    <h3>Event Materials</h3>
-                    <p>Everything you need for exhibitions, trade shows, and events</p>
-                    <div class="price">Starting at ₹5,000</div>
-                    <ul class="service-features">
-                        <li>Roll-up standees & banners</li>
-                        <li>Large format posters</li>
-                        <li>Exhibition booth designs</li>
-                        <li>Backdrop printing & setup</li>
-                        <li>Table covers & displays</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+      <div class="service-card">
+        <span class="service-icon">💡</span>
+        <h3>LED Signs</h3>
+        <p>Illuminated signage for maximum visibility day and night</p>
+        <span class="price">Starting at ₹8,000</span>
+        <ul class="service-features">
+          <li>LED backlit boards</li>
+          <li>Custom neon signs</li>
+          <li>Acrylic light boxes</li>
+          <li>Energy-efficient LEDs</li>
+        </ul>
+        <button class="btn" onclick="getQuote('LED Signs', '₹8,000')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">🎁</div>
-                    <h3>Promotional Items</h3>
-                    <p>Branded merchandise that keeps your business top of mind</p>
-                    <div class="price">Starting at ₹3,000</div>
-                    <ul class="service-features">
-                        <li>Custom t-shirts & apparel</li>
-                        <li>Branded mugs & bottles</li>
-                        <li>Pens & notepads</li>
-                        <li>Corporate gift sets</li>
-                        <li>Bulk ordering available</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+      <div class="service-card">
+        <span class="service-icon">📋</span>
+        <h3>Business Stationery</h3>
+        <p>Professional printed materials that make a lasting impression</p>
+        <span class="price">Starting at ₹200</span>
+        <ul class="service-features">
+          <li>Premium business cards</li>
+          <li>Letterheads & envelopes</li>
+          <li>Brochures & flyers</li>
+          <li>Various paper stocks</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Business Stationery', '₹200')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">🪟</div>
-                    <h3>Vehicle Wraps & Decals</h3>
-                    <p>Turn your vehicles into mobile advertisements</p>
-                    <div class="price">Starting at ₹12,000</div>
-                    <ul class="service-features">
-                        <li>Full vehicle wraps</li>
-                        <li>Partial wraps & decals</li>
-                        <li>Window graphics</li>
-                        <li>Removable vinyl options</li>
-                        <li>Professional installation</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+      <div class="service-card">
+        <span class="service-icon">🎪</span>
+        <h3>Event Materials</h3>
+        <p>Everything you need for exhibitions, trade shows, and events</p>
+        <span class="price">Starting at ₹5,000</span>
+        <ul class="service-features">
+          <li>Roll-up standees & banners</li>
+          <li>Large format posters</li>
+          <li>Exhibition booth designs</li>
+          <li>Backdrop printing & setup</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Event Materials', '₹5,000')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">🏢</div>
-                    <h3>Shop Signage</h3>
-                    <p>Complete signage solutions for retail stores and offices</p>
-                    <div class="price">Starting at ₹6,000</div>
-                    <ul class="service-features">
-                        <li>Fascia boards</li>
-                        <li>3D lettering & logos</li>
-                        <li>Interior signage</li>
-                        <li>Directory boards</li>
-                        <li>Safety & compliance signs</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
+      <div class="service-card">
+        <span class="service-icon">🎁</span>
+        <h3>Promotional Items</h3>
+        <p>Branded merchandise that keeps your business top of mind</p>
+        <span class="price">Starting at ₹3,000</span>
+        <ul class="service-features">
+          <li>Custom t-shirts & apparel</li>
+          <li>Branded mugs & bottles</li>
+          <li>Pens & notepads</li>
+          <li>Corporate gift sets</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Promotional Items', '₹3,000')">Get Quote</button>
+      </div>
 
-                <div class="production-item">
-                    <div class="production-icon">📸</div>
-                    <h3>Photo Printing & Canvas</h3>
-                    <p>High-quality photo prints and canvas for personal or commercial use</p>
-                    <div class="price">Starting at ₹1,500</div>
-                    <ul class="service-features">
-                        <li>Large format photo prints</li>
-                        <li>Canvas printing & mounting</li>
-                        <li>Framing services</li>
-                        <li>Photo restoration</li>
-                        <li>Museum-quality materials</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Quote</button>
-                </div>
-            </div>
+      <div class="service-card">
+        <span class="service-icon">🪟</span>
+        <h3>Vehicle Wraps</h3>
+        <p>Turn your vehicles into mobile advertisements</p>
+        <span class="price">Starting at ₹12,000</span>
+        <ul class="service-features">
+          <li>Full vehicle wraps</li>
+          <li>Partial wraps & decals</li>
+          <li>Window graphics</li>
+          <li>Professional installation</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Vehicle Wraps', '₹12,000')">Get Quote</button>
+      </div>
 
-            <div class="contact-box">
-                <h3>Need Custom Production?</h3>
-                <p>We handle everything from small batches to bulk orders. Contact us for a personalized quote tailored to your specific needs!</p>
-                <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'm%20interested%20in%20your%20printing%20and%20production%20services." class="whatsapp-btn" target="_blank">
-                    <span style="font-size: 1.5rem;">📱</span> Get Custom Quote on WhatsApp
-                </a>
-                <div style="margin-top: 40px; position: relative; z-index: 1;">
-                    <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>📧 Email:</strong> <a href="mailto:reevix.in@gmail.com" style="color: var(--neon-blue); text-decoration: none;">reevix.in@gmail.com</a></p>
-                    <p style="font-size: 1.1rem;"><strong>📞 Call:</strong> 
-                        <a href="tel:+917878466866" style="color: var(--neon-blue); text-decoration: none;">+91 7878466866</a> | 
-                        <a href="tel:+918619891911" style="color: var(--neon-blue); text-decoration: none;">+91 8619891911</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+      <div class="service-card">
+        <span class="service-icon">🏢</span>
+        <h3>Shop Signage</h3>
+        <p>Complete signage solutions for retail stores and offices</p>
+        <span class="price">Starting at ₹6,000</span>
+        <ul class="service-features">
+          <li>Fascia boards</li>
+          <li>3D lettering & logos</li>
+          <li>Interior signage</li>
+          <li>Safety & compliance signs</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Shop Signage', '₹6,000')">Get Quote</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📸</span>
+        <h3>Photo Printing</h3>
+        <p>High-quality photo prints and canvas for personal or commercial use</p>
+        <span class="price">Starting at ₹1,500</span>
+        <ul class="service-features">
+          <li>Large format photo prints</li>
+          <li>Canvas printing & mounting</li>
+          <li>Framing services</li>
+          <li>Museum-quality materials</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Photo Printing', '₹1,500')">Get Quote</button>
+      </div>
     </div>
+  </div>
+</section>
 
-    <footer class="footer">
-        <div class="footer-logo">REEVIX</div>
-        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
-        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
-    </footer>
+<!-- PARALLAX -->
+<section class="parallax-section reveal">
+  <div class="parallax-text" id="parallaxText">CREATE</div>
+</section>
 
-    <script>
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            const particleCount = 60;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = randomColor;
-                particle.style.boxShadow = `0 0 15px ${randomColor}`;
-                
-                particles.appendChild(particle);
-            }
-        }
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <h2>Need Custom Production?</h2>
+    <p>We handle everything from small batches to bulk orders. Contact us for a personalized quote!</p>
+    <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'm%20interested%20in%20your%20printing%20services." class="whatsapp-btn" target="_blank">
+      <span style="font-size: 1.4rem;">📱</span> WhatsApp Us
+    </a>
+    <div class="contact-info">
+      <p>📧 Email: <a href="mailto:reevix.in@gmail.com">reevix.in@gmail.com</a></p>
+      <p>📞 Call: <a href="tel:+917878466866">+91 7878466866</a> | <a href="tel:+918619891911">+91 8619891911</a></p>
+    </div>
+  </div>
+</section>
 
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('click', function() {
-                const serviceName = this.closest('.production-item').querySelector('h3').textContent;
-                const price = this.closest('.production-item').querySelector('.price').textContent;
-                const whatsappMessage = `Hi Reevix! I'm interested in your ${serviceName} service (${price}). Can you provide more details?`;
-                const whatsappUrl = `https://wa.me/+917878466866?text=${encodeURIComponent(whatsappMessage)}`;
-                window.open(whatsappUrl, '_blank');
-            });
-        });
+// Scroll reveal animation
+function reveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  
+  reveals.forEach(element => {
+    const windowHeight = window.innerHeight;
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 100;
+    
+    if (elementTop < windowHeight - elementVisible) {
+      element.classList.add('active');
+    }
+  });
+}
 
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-        });
-    </script>
+window.addEventListener('scroll', reveal);
+reveal();
+
+// Parallax text effect
+window.addEventListener('scroll', () => {
+  const text = document.getElementById('parallaxText');
+  
+  if (text) {
+    const textTop = text.getBoundingClientRect().top;
+    const textOffset = (window.innerHeight - textTop) * 0.15;
+    text.style.transform = `translateX(${textOffset}px)`;
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Get Quote function
+function getQuote(serviceName, price) {
+  const message = `Hi Reevix! I'm interested in your ${serviceName} service (${price}). Can you provide more details?`;
+  const url = `https://wa.me/+917878466866?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+</script>
+
 </body>
 </html>
