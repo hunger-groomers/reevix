@@ -103,10 +103,21 @@ html, body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200") no-repeat center top;
+  background: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200") no-repeat center center;
   background-size: cover;
+  background-attachment: fixed;
   will-change: transform;
   transition: transform 0.1s ease-out;
+}
+
+/* Mobile fix for background */
+@media (max-width: 900px) {
+  .hero-bg {
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    min-height: 100%;
+  }
 }
 
 /* animated overlay */
@@ -430,7 +441,12 @@ html, body {
 /* ================= MOBILE ================= */
 @media (max-width: 900px) {
   .hero {
-    min-height: 200vh;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+
+  .hero-content {
+    min-height: 90vh;
   }
 
   .stats {
@@ -444,6 +460,28 @@ html, body {
 
   .parallax-text {
     font-size: 4rem;
+  }
+
+  .particle {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .parallax-text {
+    font-size: 3rem;
   }
 }
 </style>
@@ -552,7 +590,13 @@ window.addEventListener('scroll', function() {
 window.addEventListener("scroll", () => {
   const bg = document.getElementById("heroBg");
   const scrolled = window.scrollY;
-  bg.style.transform = `translateY(${scrolled * 0.4}px)`;
+  
+  // Disable parallax on mobile
+  if (window.innerWidth > 900) {
+    bg.style.transform = `translateY(${scrolled * 0.4}px)`;
+  } else {
+    bg.style.transform = 'translateY(0)';
+  }
 });
 
 // Scroll reveal animation
