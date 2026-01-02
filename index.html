@@ -126,7 +126,7 @@ html, body {
     position: absolute;
     inset: 0;
     background-image: url("assets/fact-bg.jpg");
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     will-change: transform;
@@ -167,7 +167,9 @@ html, body {
     color: #1f4fff;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+    position: relative;
+    z-index: 10;
 }
 
 .hero p {
@@ -176,6 +178,9 @@ html, body {
     line-height: 1.6;
     margin-bottom: 32px;
     padding: 0 10px;
+    text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+    position: relative;
+    z-index: 10;
 }
 
 .hero .btn {
@@ -421,7 +426,7 @@ html, body {
 
     .hero-bg {
         background-attachment: scroll;
-        background-size: contain;
+        background-size: cover;
         background-position: center center;
     }
 
@@ -448,7 +453,7 @@ html, body {
 /* Mobile portrait - ensure full image visibility */
 @media (max-width: 600px) {
     .hero-bg {
-        background-size: contain;
+        background-size: cover;
         background-position: center center;
     }
 
@@ -630,7 +635,7 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(() => {
         // Force background recalculation on orientation change
         const bg = document.getElementById('heroBg');
-        bg.style.backgroundSize = 'contain';
+        bg.style.backgroundSize = 'cover';
     }, 250);
 });
 </script>
