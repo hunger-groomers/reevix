@@ -96,21 +96,39 @@ html, body {
     width: 100%;
 }
 
+/* Mobile menu toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #1f4fff;
+    transition: 0.3s;
+    border-radius: 3px;
+}
+
 /* ================= HERO ================= */
 .hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-bg {
     position: absolute;
     inset: 0;
     background-image: url("assets/fact-bg.jpg");
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     will-change: transform;
     transform: translateY(0);
 }
@@ -120,8 +138,8 @@ html, body {
     inset: 0;
     background: linear-gradient(
         to bottom,
-        rgba(255,255,255,0.35),
-        rgba(255,255,255,0.1)
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.05)
     );
 }
 
@@ -129,12 +147,12 @@ html, body {
 .hero-content {
     position: relative;
     z-index: 2;
-    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 20px;
+    padding: 100px 20px 60px;
 }
 
 .hero-inner {
@@ -143,18 +161,20 @@ html, body {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 6vw, 4.8rem);
+    font-size: clamp(2.5rem, 8vw, 4.8rem);
     font-weight: 900;
     color: #1f4fff;
     letter-spacing: 1px;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     color: #222;
     line-height: 1.6;
     margin-bottom: 32px;
+    padding: 0 10px;
 }
 
 .hero .btn {
@@ -266,14 +286,14 @@ html, body {
 /* ================= STATS ================= */
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
     text-align: center;
 }
 
 .stat {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 30px;
+    padding: 30px 20px;
     border-radius: 20px;
     cursor: pointer;
 }
@@ -284,7 +304,7 @@ html, body {
 }
 
 .stat h2 {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 5vw, 3rem);
     color: #1f4fff;
     font-weight: 800;
     margin-bottom: 10px;
@@ -292,14 +312,14 @@ html, body {
 
 .stat p {
     color: #555;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     font-weight: 500;
 }
 
 /* ================= SERVICES ================= */
 .services {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 40px;
 }
 
@@ -320,14 +340,14 @@ html, body {
 .service h3 {
     color: #1f4fff;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
     margin-bottom: 15px;
 }
 
 .service p {
     color: #555;
     line-height: 1.6;
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
 }
 
 /* ================= CTA ================= */
@@ -336,7 +356,7 @@ html, body {
 }
 
 .cta h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
     font-weight: 800;
     color: #111;
     margin-bottom: 24px;
@@ -384,53 +404,100 @@ html, body {
     z-index: 1;
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE OPTIMIZATIONS ================= */
 @media (max-width: 900px) {
     .nav-links {
         display: none;
     }
 
-    .stats,
-    .services {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    .menu-toggle {
+        display: flex;
+    }
+
+    .hero {
+        min-height: 100vh;
     }
 
     .hero-bg {
         background-attachment: scroll;
         background-size: cover;
-        background-position: center center;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
+        background-position: center;
     }
 
     .hero-content {
-        padding: 0 15px;
+        padding: 120px 15px 60px;
+    }
+
+    .section {
+        padding: 60px 15px;
+    }
+
+    .scroll-indicator {
+        display: none;
     }
 }
 
+/* Tablet optimization */
+@media (min-width: 600px) and (max-width: 900px) {
+    .hero-bg {
+        background-size: cover;
+    }
+}
+
+/* Mobile portrait - ensure full image visibility */
 @media (max-width: 600px) {
     .hero-bg {
         background-size: auto 100%;
         background-position: center center;
     }
-}
 
-@media (min-aspect-ratio: 16/9) {
-    .hero-bg {
-        background-size: 100% auto;
+    .hero-content {
+        padding: 100px 15px 40px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
     }
 }
 
-@media (max-aspect-ratio: 9/16) {
+/* Very small mobile devices */
+@media (max-width: 400px) {
+    .nav-container {
+        padding: 15px 15px;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .hero .btn,
+    .cta .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+    }
+}
+
+/* Landscape mobile optimization */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 80px 0 40px;
+    }
+
+    .hero-content {
+        padding: 60px 20px 30px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* High resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero-bg {
-        background-size: auto 100%;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 }
 </style>
@@ -441,6 +508,11 @@ html, body {
 <nav class="navbar" id="navbar">
     <div class="nav-container">
         <a href="#home" class="logo">REEVIX</a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Digital</a></li>
@@ -522,12 +594,17 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Parallax effect
+// Optimized parallax effect (only for desktop)
+let ticking = false;
 window.addEventListener("scroll", () => {
-    const bg = document.getElementById("heroBg");
-    const scroll = window.scrollY;
-    if (window.innerWidth > 900) {
-        bg.style.transform = `translateY(${scroll * 0.25}px)`;
+    if (!ticking && window.innerWidth > 900) {
+        window.requestAnimationFrame(() => {
+            const bg = document.getElementById("heroBg");
+            const scroll = window.scrollY;
+            bg.style.transform = `translateY(${scroll * 0.25}px)`;
+            ticking = false;
+        });
+        ticking = true;
     }
 });
 
@@ -543,6 +620,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+// Optimize background on resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Force background recalculation on orientation change
+        const bg = document.getElementById('heroBg');
+        bg.style.backgroundSize = window.innerWidth <= 600 ? 'auto 100%' : 'cover';
+    }, 250);
 });
 </script>
 
