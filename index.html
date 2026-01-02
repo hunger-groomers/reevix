@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +16,8 @@
 
 html, body {
   font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
   color: #111;
+  scroll-behavior: smooth;
 }
 
 /* ================= NAVBAR ================= */
@@ -27,12 +26,8 @@ html, body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.navbar.scrolled {
-  background: #ffffff;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
 }
 
 .nav-container {
@@ -62,23 +57,24 @@ html, body {
   color: #222;
 }
 
-/* ================= HERO ================= */
+/* ================= HERO (TALL IMAGE) ================= */
 .hero {
   position: relative;
-  height: 100vh;
+  min-height: 170vh; /* KEY FIX */
   overflow: hidden;
+  padding-top: 120px; /* space for navbar */
 }
 
 /* background image */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url("assets/fact-bg.jpg") center / cover no-repeat;
-  transform: scale(1.05);
+  background: url("assets/fact-bg.jpg") no-repeat center top;
+  background-size: contain; /* SHOW FULL IMAGE */
   will-change: transform;
 }
 
-/* soft overlay for readability */
+/* light overlay only for readability */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -89,11 +85,11 @@ html, body {
   );
 }
 
-/* hero content */
+/* ================= HERO CONTENT ================= */
 .hero-content {
   position: relative;
   z-index: 2;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,8 +104,7 @@ html, body {
 .hero h1 {
   font-size: clamp(3rem, 6vw, 4.8rem);
   font-weight: 900;
-  color: #1f4fff; /* complements yellow */
-  letter-spacing: 1px;
+  color: #1f4fff;
 }
 
 .hero p {
@@ -136,7 +131,7 @@ html, body {
   box-shadow: 0 12px 30px rgba(31,79,255,0.35);
 }
 
-/* ================= SECTIONS ================= */
+/* ================= NORMAL CONTENT ================= */
 .section {
   padding: 120px 20px;
   background: #ffffff;
@@ -147,7 +142,6 @@ html, body {
   margin: auto;
 }
 
-/* ================= STATS ================= */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -157,7 +151,6 @@ html, body {
 
 .stat h2 {
   font-size: 3rem;
-  font-weight: 800;
   color: #1f4fff;
 }
 
@@ -166,62 +159,14 @@ html, body {
   color: #555;
 }
 
-/* ================= SERVICES ================= */
-.services {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.service {
-  padding: 30px;
-}
-
-.service h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1f4fff;
-}
-
-.service p {
-  margin-top: 10px;
-  color: #555;
-  line-height: 1.6;
-}
-
-/* ================= CTA ================= */
-.cta {
-  text-align: center;
-}
-
-.cta h2 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: #111;
-}
-
-/* ================= REVEAL ANIMATION ================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 900px) {
-  .stats,
-  .services {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .hero {
+    min-height: 200vh; /* allow full image on tall phones */
   }
 
-  .hero-bg {
-    background-position: center top;
+  .stats {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -229,7 +174,7 @@ html, body {
 
 <body>
 
-<nav class="navbar" id="navbar">
+<nav class="navbar">
   <div class="nav-container">
     <div class="logo">REEVIX</div>
     <ul class="nav-links">
@@ -242,13 +187,12 @@ html, body {
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
-    <div class="hero-inner reveal">
+    <div class="hero-inner">
       <h1>REEVIX</h1>
       <p>The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
       <a class="btn">Get Started</a>
@@ -256,9 +200,8 @@ html, body {
   </div>
 </section>
 
-<!-- STATS -->
 <section class="section">
-  <div class="container stats reveal">
+  <div class="container stats">
     <div class="stat">
       <h2>50+</h2>
       <p>Services</p>
@@ -274,53 +217,12 @@ html, body {
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section">
-  <div class="container services reveal">
-    <div class="service">
-      <h3>Digital Marketing</h3>
-      <p>Ads, branding & social media.</p>
-    </div>
-    <div class="service">
-      <h3>Printing & Production</h3>
-      <p>Banners, signage & packaging.</p>
-    </div>
-    <div class="service">
-      <h3>3D & Animation</h3>
-      <p>High-quality visual storytelling.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta">
-  <div class="container reveal">
-    <h2>Ready to Transform Your Business?</h2>
-    <a class="btn">Get Started</a>
-  </div>
-</section>
-
 <script>
-/* Navbar scroll effect */
+/* gentle parallax */
 window.addEventListener("scroll", () => {
-  const navbar = document.getElementById("navbar");
-  if (window.scrollY > 80) navbar.classList.add("scrolled");
-  else navbar.classList.remove("scrolled");
-
-  /* Parallax background */
   const bg = document.getElementById("heroBg");
-  bg.style.transform = `translateY(${window.scrollY * 0.25}px) scale(1.05)`;
+  bg.style.transform = `translateY(${window.scrollY * 0.15}px)`;
 });
-
-/* Reveal animation */
-const reveals = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
-  });
-}, { threshold: 0.15 });
-
-reveals.forEach(el => observer.observe(el));
 </script>
 
 </body>
