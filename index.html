@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reevix – Digital Marketing & Production Excellence</title>
+<title>Reevix – Digital Marketing Excellence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -18,48 +17,24 @@
 html, body {
     height: 100%;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
 }
 
-/* ================= BACKGROUND IMAGE ================= */
-.hero-background {
-    position: fixed;
-    inset: 0;
-    background-image: url("assets/fact-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -3;
+/* ===== BACKGROUND IMAGE (FULL & CLEAR) ===== */
+body {
+    background: url("assets/fact-bg.jpg") no-repeat center center;
+    background-size: contain;
+    background-color: #f5f5f5;
 }
 
-/* IMAGE COLOR GRADING (NOT DARK THEME) */
-.bg-overlay {
-    position: fixed;
-    inset: 0;
-    background:
-        linear-gradient(
-            to right,
-            rgba(255,255,255,0.28),
-            rgba(255,255,255,0.08),
-            rgba(255,215,0,0.18)
-        ),
-        radial-gradient(
-            circle at center,
-            rgba(0,0,0,0.12),
-            rgba(0,0,0,0.35)
-        );
-    z-index: -2;
-}
-
-/* ================= NAVBAR ================= */
+/* ===== NAVBAR ===== */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 18px 0;
-    backdrop-filter: blur(18px);
-    background: rgba(255,255,255,0.25);
-    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 100;
 }
 
 .nav-container {
@@ -74,9 +49,7 @@ html, body {
 .logo {
     font-size: 1.8rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #00aaff, #7b5cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #1e6cff;
     text-decoration: none;
 }
 
@@ -87,145 +60,112 @@ html, body {
 }
 
 .nav-links a {
-    color: #1a1a1a;
     text-decoration: none;
     font-weight: 500;
+    color: #222;
 }
 
-.nav-links a:hover {
-    opacity: 0.7;
-}
-
-/* ================= FLOATING CONTENT ================= */
+/* ===== CONTENT ===== */
 .page-content {
     padding-top: 140px;
-}
-
-/* GLASS CONTAINER */
-.floating-shell {
-    max-width: 1400px;
-    margin: 60px auto;
-    background: rgba(255,255,255,0.14);
-    backdrop-filter: blur(22px) saturate(140%);
-    -webkit-backdrop-filter: blur(22px) saturate(140%);
-    border-radius: 32px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-    position: relative;
-}
-
-/* ================= SECTIONS ================= */
-.section {
-    padding: 80px 40px;
-    background: transparent;
-}
-
-/* ================= HERO TEXT ================= */
-.page-title {
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 900;
+    max-width: 1200px;
+    margin: auto;
     text-align: center;
-    background: linear-gradient(135deg, #5aa9ff, #7b5cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+}
+
+/* ===== HERO ===== */
+.page-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 900;
+    color: #1e6cff;
+    margin-bottom: 20px;
 }
 
 .page-subtitle {
-    text-align: center;
-    font-size: 1.3rem;
-    margin-top: 20px;
-    color: #2a2a2a;
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 700px;
+    margin: auto;
 }
 
-/* ================= STATS ================= */
+/* ===== STATS (NO BOXES) ===== */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-    gap: 30px;
-    margin-top: 80px;
-}
-
-.stat-item {
-    background: rgba(255,255,255,0.22);
-    backdrop-filter: blur(18px);
-    border-radius: 20px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    margin-top: 120px;
 }
 
 .stat-number {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #5aa9ff, #7b5cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #1e6cff;
 }
 
-/* ================= SERVICES ================= */
+.stat-label {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* ===== SERVICES ===== */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
-    gap: 40px;
-    margin-top: 80px;
-}
-
-.service-card {
-    background: rgba(255,255,255,0.22);
-    backdrop-filter: blur(18px);
-    border-radius: 24px;
-    padding: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    margin: 140px 0;
 }
 
 .service-card h3 {
-    background: linear-gradient(135deg, #5aa9ff, #7b5cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e6cff;
 }
 
 .service-card p {
-    color: #2a2a2a;
+    margin-top: 10px;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* ================= CTA ================= */
+/* ===== CTA ===== */
 .cta {
-    text-align: center;
-    padding: 100px 40px;
+    margin: 160px 0 120px;
+}
+
+.cta h2 {
+    font-size: 2.2rem;
+    color: #222;
 }
 
 .btn {
-    padding: 15px 40px;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #5aa9ff, #7b5cff);
-    color: #ffffff;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 36px;
+    background: #1e6cff;
+    color: #fff;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 
-/* ================= FOOTER ================= */
-footer {
-    text-align: center;
-    padding: 50px;
-    color: #2a2a2a;
-}
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+    body {
+        background-size: cover;
+    }
 
-/* ================= MOBILE ================= */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .floating-shell { margin: 20px; }
-    .hero-background { background-position: top center; }
+    .stats-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="hero-background"></div>
-<div class="bg-overlay"></div>
-
-<!-- NAVBAR -->
 <nav class="navbar">
     <div class="nav-container">
         <a class="logo">REEVIX</a>
@@ -239,33 +179,27 @@ footer {
     </div>
 </nav>
 
-<!-- CONTENT -->
 <div class="page-content">
-<div class="floating-shell">
-
-<section class="section">
     <h1 class="page-title">REEVIX</h1>
     <p class="page-subtitle">
         The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.
     </p>
 
     <div class="stats-grid">
-        <div class="stat-item">
+        <div>
             <div class="stat-number">50+</div>
-            Services
+            <div class="stat-label">Services</div>
         </div>
-        <div class="stat-item">
+        <div>
             <div class="stat-number">24/7</div>
-            Support
+            <div class="stat-label">Support</div>
         </div>
-        <div class="stat-item">
+        <div>
             <div class="stat-number">100%</div>
-            Custom
+            <div class="stat-label">Custom</div>
         </div>
     </div>
-</section>
 
-<section class="section">
     <div class="services-grid">
         <div class="service-card">
             <h3>Digital Marketing</h3>
@@ -280,19 +214,12 @@ footer {
             <p>High-quality visual storytelling.</p>
         </div>
     </div>
-</section>
 
-<section class="cta">
-    <h2>Ready to Transform Your Business?</h2>
-    <a class="btn">Get Started</a>
-</section>
-
+    <div class="cta">
+        <h2>Ready to Transform Your Business?</h2>
+        <a class="btn">Get Started</a>
+    </div>
 </div>
-</div>
-
-<footer>
-    © 2024 Reevix. All rights reserved.
-</footer>
 
 </body>
 </html>
