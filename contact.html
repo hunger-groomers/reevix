@@ -1,615 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Reevix</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - REEVIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #ff0080 100());
-            --dark-bg: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --neon-blue: #00f5ff;
-            --neon-pink: #ff0080;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+html, body {
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  scroll-behavior: smooth;
+  background: #ffffff;
+}
 
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
-            animation: backgroundFloat 20s ease-in-out infinite;
-        }
+/* ================= NAVBAR (Consistent with Homepage) ================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
 
-        @keyframes backgroundFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
-        }
+.navbar.scrolled {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
 
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            opacity: 0;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1f4fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(100px) rotate(360deg); opacity: 0; }
-        }
+.logo:hover {
+  transform: scale(1.05);
+}
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #222;
+  cursor: pointer;
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1f4fff;
+  transition: width 0.3s ease;
+}
 
-        .logo::before {
-            content: '';
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            animation: logoSpin 10s linear infinite;
-        }
+.nav-links a:hover {
+  color: #1f4fff;
+}
 
-        @keyframes logoSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
+.hero-section {
+  padding: 140px 40px 80px;
+  text-align: center;
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
+.hero-section::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(31, 79, 255, 0.1), transparent 70%);
+  top: -300px;
+  left: -300px;
+  animation: float 20s ease-in-out infinite;
+}
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--neon-blue);
-        }
+.hero-section::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 217, 61, 0.1), transparent 70%);
+  bottom: -250px;
+  right: -250px;
+  animation: float 15s ease-in-out infinite reverse;
+}
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            transition: width 0.3s ease;
-        }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 50px) scale(1.1); }
+}
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+.page-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  animation: titleAppear 1s ease-out;
+}
 
-        .page-content {
-            min-height: 100vh;
-            padding-top: 120px;
-        }
+@keyframes titleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        .section {
-            padding: 80px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.page-subtitle {
+  color: #555;
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto 60px;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1s ease-out 0.2s backwards;
+}
 
-        .page-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        @keyframes titleGlow {
-            0% { 
-                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
-                transform: scale(1);
-            }
-            100% { 
-                filter: drop-shadow(0 0 50px rgba(102, 126, 234, 0.8));
-                transform: scale(1.02);
-            }
-        }
+.section {
+  padding: 80px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-        .page-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.3rem;
-            margin-bottom: 60px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out;
-        }
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.contact-card {
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.03) 0%, rgba(255, 217, 61, 0.03) 100%);
+  border-radius: 24px;
+  padding: 50px 40px;
+  border: 2px solid rgba(31, 79, 255, 0.1);
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(31, 79, 255, 0.1), transparent 60%);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
 
-        .contact-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.6s ease-out backwards;
-        }
+.contact-card:hover::before {
+  opacity: 1;
+  animation: rotate 4s linear infinite;
+}
 
-        .contact-card:nth-child(1) { animation-delay: 0.1s; }
-        .contact-card:nth-child(2) { animation-delay: 0.2s; }
-        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.contact-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.08) 0%, rgba(255, 217, 61, 0.08) 100%);
+  box-shadow: 0 30px 70px rgba(31, 79, 255, 0.3);
+  border-color: rgba(31, 79, 255, 0.3);
+}
 
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent 60%);
-            opacity: 0;
-            transition: all 0.6s ease;
-        }
+.contact-icon {
+  font-size: 4rem;
+  margin-bottom: 25px;
+  display: inline-block;
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
 
-        .contact-card:hover::before {
-            opacity: 1;
-            animation: rotate 4s linear infinite;
-        }
+.contact-card:hover .contact-icon {
+  transform: scale(1.2) rotateY(360deg);
+}
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+.contact-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #1f4fff;
+  position: relative;
+  z-index: 1;
+}
 
-        .contact-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
+.contact-card p {
+  color: #666;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+}
 
-        .contact-icon {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            display: inline-block;
-            transition: transform 0.4s ease;
-            position: relative;
-            z-index: 1;
-        }
+.contact-card a {
+  color: #222;
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 5px 0;
+  position: relative;
+  z-index: 1;
+}
 
-        .contact-card:hover .contact-icon {
-            transform: scale(1.2) rotateY(360deg);
-        }
+.contact-card a:hover {
+  color: #1f4fff;
+  transform: translateX(5px);
+}
 
-        .contact-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--neon-blue);
-            position: relative;
-            z-index: 1;
-        }
+.whatsapp-section {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  border-radius: 30px;
+  padding: 80px 40px;
+  margin: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-        .contact-card p {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
+.whatsapp-section::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: pulse 8s ease-in-out infinite;
+}
 
-        .contact-card a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.15rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin: 5px 0;
-            position: relative;
-            z-index: 1;
-        }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+}
 
-        .contact-card a:hover {
-            color: var(--neon-pink);
-            transform: translateX(5px);
-        }
+.whatsapp-section h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
 
-        .whatsapp-section {
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(18, 140, 126, 0.1));
-            border-radius: 30px;
-            padding: 60px;
-            margin: 80px 0;
-            border: 2px solid rgba(37, 211, 102, 0.3);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+.whatsapp-section p {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
 
-        .whatsapp-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(37, 211, 102, 0.1), transparent);
-            animation: rotateCTA 15s linear infinite;
-        }
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  color: #25d366;
+  padding: 20px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
 
-        @keyframes rotateCTA {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+.whatsapp-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
 
-        .whatsapp-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-            position: relative;
-            z-index: 1;
-        }
+.info-box {
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.03) 0%, rgba(255, 217, 61, 0.03) 100%);
+  border-radius: 24px;
+  padding: 50px 40px;
+  border: 2px solid rgba(31, 79, 255, 0.1);
+  margin-top: 60px;
+}
 
-        .whatsapp-section p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
+.info-box h3 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #222;
+}
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-            padding: 22px 45px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
-            position: relative;
-            z-index: 1;
-        }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
 
-        .whatsapp-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6);
-        }
+.feature-item {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(31, 79, 255, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
 
-        .info-box {
-            background: var(--glass-bg);
-            border-radius: 24px;
-            padding: 50px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 60px;
-        }
+.feature-item:hover {
+  background: rgba(31, 79, 255, 0.05);
+  transform: translateY(-5px);
+  border-color: rgba(31, 79, 255, 0.2);
+}
 
-        .info-box h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-primary);
-        }
+.feature-item span {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+}
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
+.feature-item p {
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
-        .feature-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+.feature-item .desc {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 400;
+}
 
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
+.business-hours {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 2px solid rgba(31, 79, 255, 0.1);
+}
 
-        .feature-item span {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 10px;
-        }
+.business-hours h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #222;
+}
 
-        .footer {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 80px;
-        }
+.business-hours p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
 
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-        }
+.business-hours .emergency {
+  color: #1f4fff;
+  font-size: 0.95rem;
+  margin-top: 15px;
+  font-weight: 500;
+}
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+.footer {
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  padding: 60px 40px 40px;
+  text-align: center;
+  border-top: 2px solid rgba(31, 79, 255, 0.1);
+  margin-top: 80px;
+}
 
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+}
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
-            border-radius: 5px;
-        }
+.footer p {
+  color: #666;
+  line-height: 1.8;
+}
 
-        @media (max-width: 768px) {
-            .nav-container, .section {
-                padding: 0 20px;
-            }
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
 
-            .whatsapp-section, .info-box {
-                padding: 40px 20px;
-            }
-        }
-    </style>
+  .section {
+    padding: 60px 20px;
+  }
+
+  .hero-section {
+    padding: 120px 20px 60px;
+  }
+
+  .whatsapp-section, .info-box {
+    padding: 40px 20px;
+  }
+
+  .contact-card {
+    padding: 40px 30px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
-    <div class="background-animation"></div>
-    <div class="particles" id="particles"></div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo" onclick="window.location.href='index.html'">REEVIX</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="digital-marketing.html">Digital Marketing</a></li>
-                <li><a href="printing-production.html">Printing & Production</a></li>
-                <li><a href="3d-animation.html">3D & Animation</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">REEVIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="digital-marketing.html">Digital</a></li>
+      <li><a href="printing-production.html">Printing</a></li>
+      <li><a href="3d-animation.html">3D</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="page-content">
-        <div class="section">
-            <h1 class="page-title">Get In Touch</h1>
-            <p class="page-subtitle">We're here to help transform your business. Reach out to us through any of these channels!</p>
-            
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email Us</h3>
-                    <p>Send us a detailed message and we'll get back to you within 24 hours</p>
-                    <a href="mailto:reevix.in@gmail.com">reevix.in@gmail.com</a>
-                </div>
+<div class="hero-section">
+  <h1 class="page-title">Get In Touch</h1>
+  <p class="page-subtitle">We're here to help transform your business. Reach out to us through any of these channels!</p>
+</div>
 
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <h3>Call Us</h3>
-                    <p>Speak directly with our team for immediate assistance</p>
-                    <a href="tel:+917878466866">+91 7878466866</a>
-                    <a href="tel:+918619891911">+91 8619891911</a>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <h3>Location</h3>
-                    <p>Serving clients across India and beyond</p>
-                    <p style="font-weight: 600; color: var(--text-primary); margin-top: 15px;">Jodhpur, Rajasthan<br>India</p>
-                </div>
-            </div>
-
-            <div class="whatsapp-section">
-                <h2>Prefer WhatsApp?</h2>
-                <p>Chat with us instantly for quick queries, quotes, and support</p>
-                <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'd%20like%20to%20know%20more%20about%20your%20services." class="whatsapp-btn" target="_blank">
-                    <span style="font-size: 1.8rem;">📱</span> Start WhatsApp Chat
-                </a>
-            </div>
-
-            <div class="info-box">
-                <h3>Why Choose Reevix?</h3>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <span>✨</span>
-                        <p><strong>50+ Premium Services</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Complete digital solutions</p>
-                    </div>
-                    <div class="feature-item">
-                        <span>⚡</span>
-                        <p><strong>Fast Delivery</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Quick turnaround times</p>
-                    </div>
-                    <div class="feature-item">
-                        <span>🎯</span>
-                        <p><strong>Data-Driven Results</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Proven strategies that work</p>
-                    </div>
-                    <div class="feature-item">
-                        <span>💡</span>
-                        <p><strong>Creative Excellence</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Award-winning designs</p>
-                    </div>
-                    <div class="feature-item">
-                        <span>🔄</span>
-                        <p><strong>Unlimited Revisions</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Until you're 100% satisfied</p>
-                    </div>
-                    <div class="feature-item">
-                        <span>📱</span>
-                        <p><strong>24/7 Support</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Always here to help</p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 50px;">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Business Hours</h3>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">Monday - Saturday: 9:00 AM - 8:00 PM IST</p>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">Sunday: 10:00 AM - 6:00 PM IST</p>
-                    <p style="color: var(--neon-blue); font-size: 0.95rem; margin-top: 15px;">*Emergency support available 24/7 for premium clients</p>
-                </div>
-            </div>
-        </div>
+<div class="section">
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <h3>Email Us</h3>
+      <p>Send us a detailed message and we'll get back to you within 24 hours</p>
+      <a href="mailto:reevix.in@gmail.com">reevix.in@gmail.com</a>
     </div>
 
-    <footer class="footer">
-        <div class="footer-logo">REEVIX</div>
-        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
-        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
-    </footer>
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h3>Call Us</h3>
+      <p>Speak directly with our team for immediate assistance</p>
+      <a href="tel:+917878466866">+91 7878466866</a><br>
+      <a href="tel:+918619891911">+91 8619891911</a>
+    </div>
 
-    <script>
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            const particleCount = 60;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = randomColor;
-                particle.style.boxShadow = `0 0 15px ${randomColor}`;
-                
-                particles.appendChild(particle);
-            }
-        }
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h3>Location</h3>
+      <p>Serving clients across India and beyond</p>
+      <p style="font-weight: 600; color: #222; margin-top: 15px;">Jodhpur, Rajasthan<br>India</p>
+    </div>
+  </div>
 
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
+  <div class="whatsapp-section">
+    <h2>Prefer WhatsApp?</h2>
+    <p>Chat with us instantly for quick queries, quotes, and support</p>
+    <a href="https://wa.me/917878466866?text=Hi%20Reevix!%20I'd%20like%20to%20know%20more%20about%20your%20services." class="whatsapp-btn" target="_blank">
+      <span style="font-size: 1.8rem;">📱</span> Start WhatsApp Chat
+    </a>
+  </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-        });
-    </script>
+  <div class="info-box">
+    <h3>Why Choose Reevix?</h3>
+    <div class="features-grid">
+      <div class="feature-item">
+        <span>✨</span>
+        <p>50+ Premium Services</p>
+        <p class="desc">Complete digital solutions</p>
+      </div>
+      <div class="feature-item">
+        <span>⚡</span>
+        <p>Fast Delivery</p>
+        <p class="desc">Quick turnaround times</p>
+      </div>
+      <div class="feature-item">
+        <span>🎯</span>
+        <p>Data-Driven Results</p>
+        <p class="desc">Proven strategies that work</p>
+      </div>
+      <div class="feature-item">
+        <span>💡</span>
+        <p>Creative Excellence</p>
+        <p class="desc">Award-winning designs</p>
+      </div>
+      <div class="feature-item">
+        <span>🔄</span>
+        <p>Unlimited Revisions</p>
+        <p class="desc">Until you're 100% satisfied</p>
+      </div>
+      <div class="feature-item">
+        <span>📱</span>
+        <p>24/7 Support</p>
+        <p class="desc">Always here to help</p>
+      </div>
+    </div>
+
+    <div class="business-hours">
+      <h3>Business Hours</h3>
+      <p>Monday - Saturday: 9:00 AM - 8:00 PM IST</p>
+      <p>Sunday: 10:00 AM - 6:00 PM IST</p>
+      <p class="emergency">*Emergency support available 24/7 for premium clients</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">REEVIX</div>
+  <p>Transforming digital landscapes with innovative marketing solutions.</p>
+  <p style="margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
+
 </body>
 </html>
