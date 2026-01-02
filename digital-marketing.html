@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Digital Marketing — REEVIX</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -16,17 +17,18 @@
 html, body {
   font-family: 'Inter', sans-serif;
   color: #111;
-  scroll-behavior: smooth;
   background: #ffffff;
+  scroll-behavior: smooth;
 }
 
+/* NAVBAR - Matching index.html style */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
   transition: all 0.3s ease;
 }
 
@@ -36,30 +38,25 @@ html, body {
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
-  padding: 18px 24px;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #1f4fff;
-  transition: transform 0.3s ease;
-  cursor: pointer;
   text-decoration: none;
-}
-
-.logo:hover {
-  transform: scale(1.05);
+  letter-spacing: 1px;
 }
 
 .nav-links {
   display: flex;
-  gap: 28px;
+  gap: 32px;
   list-style: none;
 }
 
@@ -67,16 +64,18 @@ html, body {
   text-decoration: none;
   font-weight: 500;
   color: #222;
-  cursor: pointer;
   position: relative;
-  padding: 8px 0;
   transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1f4fff;
 }
 
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -6px;
   left: 0;
   width: 0;
   height: 2px;
@@ -84,359 +83,161 @@ html, body {
   transition: width 0.3s ease;
 }
 
-.nav-links a:hover {
-  color: #1f4fff;
-}
-
 .nav-links a:hover::after {
   width: 100%;
 }
 
+.nav-links a.active {
+  color: #1f4fff;
+}
+
+/* HERO */
 .hero-section {
-  padding: 140px 40px 80px;
+  padding: 180px 40px 120px;
   text-align: center;
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(31, 79, 255, 0.1), transparent 70%);
-  top: -300px;
-  left: -300px;
-  animation: float 20s ease-in-out infinite;
-}
-
-.hero-section::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 217, 61, 0.1), transparent 70%);
-  bottom: -250px;
-  right: -250px;
-  animation: float 15s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(50px, 50px) scale(1.1); }
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
 }
 
 .page-title {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 900;
-  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  background: linear-gradient(135deg, #1f4fff, #0066ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-  animation: titleAppear 1s ease-out;
-}
-
-@keyframes titleAppear {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-bottom: 24px;
 }
 
 .page-subtitle {
-  color: #555;
+  max-width: 850px;
+  margin: 0 auto;
   font-size: 1.3rem;
-  max-width: 800px;
-  margin: 0 auto;
   line-height: 1.8;
-  position: relative;
-  z-index: 1;
-  animation: fadeInUp 1s ease-out 0.2s backwards;
+  color: #555;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* SECTIONS */
 .section {
-  padding: 80px 40px;
+  padding: 100px 40px;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  text-align: center;
+  font-size: 2.8rem;
   font-weight: 800;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  background: linear-gradient(135deg, #1f4fff, #0066ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .section-description {
   text-align: center;
+  max-width: 750px;
+  margin: 0 auto 70px;
   color: #666;
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto 60px;
   line-height: 1.8;
+  font-size: 1.1rem;
 }
 
+/* SERVICES */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
   margin-top: 60px;
 }
 
 .service-card {
-  background: linear-gradient(135deg, rgba(31, 79, 255, 0.03) 0%, rgba(255, 217, 61, 0.03) 100%);
-  backdrop-filter: blur(20px);
+  padding: 45px;
   border-radius: 24px;
-  padding: 40px;
-  border: 2px solid rgba(31, 79, 255, 0.1);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.service-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(31, 79, 255, 0.1), transparent 60%);
-  opacity: 0;
-  transition: all 0.6s ease;
-  transform: scale(0);
-}
-
-.service-card:hover::before {
-  opacity: 1;
-  transform: scale(1) rotate(45deg);
+  background: rgba(31,79,255,0.03);
+  border: 2px solid rgba(31,79,255,0.1);
+  transition: all 0.4s ease;
 }
 
 .service-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  background: linear-gradient(135deg, rgba(31, 79, 255, 0.08) 0%, rgba(255, 217, 61, 0.08) 100%);
-  box-shadow: 0 25px 60px rgba(31, 79, 255, 0.25);
-  border-color: rgba(31, 79, 255, 0.3);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px rgba(31,79,255,0.2);
+  border-color: rgba(31,79,255,0.3);
 }
 
 .service-icon {
   font-size: 3.5rem;
   margin-bottom: 20px;
   display: block;
-  transition: transform 0.4s ease;
-}
-
-.service-card:hover .service-icon {
-  transform: scale(1.2) rotateY(360deg);
 }
 
 .service-card h3 {
   font-size: 1.6rem;
-  color: #222;
-  margin-bottom: 15px;
-  position: relative;
-  z-index: 1;
-  font-weight: 700;
+  margin-bottom: 14px;
+  color: #111;
 }
 
 .service-card p {
   color: #666;
-  line-height: 1.8;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 20px;
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
-.service-list {
-  list-style: none;
-  margin-top: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.service-list li {
-  color: #555;
-  padding: 8px 0;
-  padding-left: 30px;
-  position: relative;
-  line-height: 1.6;
-}
-
-.service-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: #1f4fff;
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.feature-card {
-  text-align: center;
-  padding: 40px 30px;
-  background: linear-gradient(135deg, rgba(31, 79, 255, 0.03) 0%, rgba(255, 217, 61, 0.03) 100%);
-  border-radius: 20px;
-  border: 2px solid rgba(31, 79, 255, 0.1);
-  transition: all 0.4s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  background: linear-gradient(135deg, rgba(31, 79, 255, 0.08) 0%, rgba(255, 217, 61, 0.08) 100%);
-  box-shadow: 0 20px 50px rgba(31, 79, 255, 0.2);
-  border-color: rgba(31, 79, 255, 0.3);
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  color: #222;
-  font-weight: 700;
-}
-
-.feature-card p {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
+/* CTA */
 .cta-section {
-  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
+  margin: 80px 40px;
   padding: 100px 40px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
   border-radius: 30px;
-  margin: 60px 40px;
-}
-
-.cta-section::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  top: -250px;
-  right: -250px;
-  animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.1; }
-  50% { transform: scale(1.3); opacity: 0.2; }
+  background: linear-gradient(135deg, #1f4fff, #0066ff);
 }
 
 .cta-section h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  color: #ffffff;
+  font-size: 3rem;
+  color: #fff;
   margin-bottom: 20px;
-  font-weight: 900;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  position: relative;
-  z-index: 1;
+  font-weight: 800;
 }
 
 .cta-section p {
-  color: rgba(255,255,255,0.95);
-  font-size: 1.2rem;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 1;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 40px;
+  color: rgba(255,255,255,0.95);
+  font-size: 1.25rem;
+  line-height: 1.7;
 }
 
 .btn {
-  display: inline-block;
-  padding: 16px 45px;
-  background: #ffffff;
-  color: #1f4fff;
+  padding: 18px 50px;
   border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  background: #fff;
+  color: #1f4fff;
+  font-size: 1.15rem;
+  font-weight: 700;
   border: none;
-  font-size: 1.1rem;
-  font-family: 'Inter', sans-serif;
-  z-index: 1;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(31, 79, 255, 0.2), transparent);
-  transition: left 0.6s ease;
-}
-
-.btn:hover::before {
-  left: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
+/* FOOTER */
 .footer {
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-  padding: 60px 40px 40px;
+  padding: 70px 40px;
   text-align: center;
-  border-top: 2px solid rgba(31, 79, 255, 0.1);
+  border-top: 2px solid rgba(31,79,255,0.1);
+  background: #fafbff;
 }
 
 .footer-logo {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 20px;
+  color: #1f4fff;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
 }
 
 .footer p {
@@ -444,27 +245,28 @@ html, body {
   line-height: 1.8;
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
+/* MOBILE */
+@media(max-width:768px){
+  .nav-links { 
+    display: none; 
   }
-
+  
+  .nav-container {
+    padding: 18px 24px;
+  }
+  
+  .section { 
+    padding: 60px 20px; 
+  }
+  
+  .hero-section {
+    padding: 140px 20px 80px;
+  }
+  
   .services-grid {
     grid-template-columns: 1fr;
   }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section {
-    padding: 60px 20px;
-  }
-
-  .hero-section {
-    padding: 120px 20px 60px;
-  }
-
+  
   .cta-section {
     margin: 40px 20px;
     padding: 60px 30px;
@@ -475,23 +277,31 @@ html, body {
 
 <body>
 
+<!-- NAVBAR - Consistent with index.html -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
-    <a href="#home" class="logo">REEVIX</a>
+    <a href="index.html" class="logo">REEVIX</a>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="https://wa.me/917878466866?text=Hi%20Reevix!%20I'd%20like%20to%20know%20more%20about%20Digital%20Marketing." target="_blank">Contact</a></li>
+      <li><a href="digital-marketing.html" class="active">Digital</a></li>
+      <li><a href="printing.html">Printing</a></li>
+      <li><a href="3d.html">3D</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="hero-section" id="home">
+<!-- HERO -->
+<section class="hero-section">
   <h1 class="page-title">Digital Marketing</h1>
-  <p class="page-subtitle">Amplify your brand's voice across every digital channel. From strategy to execution, we transform your online presence into a powerful growth engine.</p>
-</div>
+  <p class="page-subtitle">
+    Amplify your brand's voice across every digital channel. From strategy to execution, we transform your online presence into a powerful growth engine.
+  </p>
+</section>
 
-<div class="section" id="services">
+<!-- SERVICES -->
+<section class="section">
   <h2 class="section-title">Our Digital Marketing Services</h2>
   <p class="section-description">Comprehensive solutions designed to elevate your brand and drive measurable results</p>
 
@@ -499,126 +309,59 @@ html, body {
     <div class="service-card">
       <span class="service-icon">📱</span>
       <h3>Social Media Management</h3>
-      <p>Build a thriving community and engage your audience across all major platforms.</p>
-      <ul class="service-list">
-        <li>Content creation & scheduling</li>
-        <li>Community management</li>
-        <li>Analytics & reporting</li>
-        <li>Influencer partnerships</li>
-      </ul>
+      <p>Build authentic connections and grow your audience across all major platforms with strategic content and community engagement.</p>
     </div>
 
     <div class="service-card">
       <span class="service-icon">🎯</span>
       <h3>Paid Advertising</h3>
-      <p>Drive targeted traffic and conversions with data-driven ad campaigns.</p>
-      <ul class="service-list">
-        <li>Google Ads management</li>
-        <li>Facebook & Instagram ads</li>
-        <li>LinkedIn advertising</li>
-        <li>Retargeting campaigns</li>
-      </ul>
+      <p>Performance-driven ad campaigns across Google, Facebook, Instagram, and LinkedIn that maximize ROI and drive conversions.</p>
     </div>
 
     <div class="service-card">
       <span class="service-icon">🔍</span>
       <h3>SEO Optimization</h3>
-      <p>Dominate search results and attract organic traffic that converts.</p>
-      <ul class="service-list">
-        <li>Keyword research & strategy</li>
-        <li>On-page optimization</li>
-        <li>Link building</li>
-        <li>Technical SEO audits</li>
-      </ul>
+      <p>Boost your organic visibility and rank higher in search results with comprehensive on-page and off-page optimization strategies.</p>
     </div>
 
     <div class="service-card">
       <span class="service-icon">✉️</span>
       <h3>Email Marketing</h3>
-      <p>Nurture leads and build lasting relationships through personalized campaigns.</p>
-      <ul class="service-list">
-        <li>Campaign design & execution</li>
-        <li>List segmentation</li>
-        <li>A/B testing</li>
-        <li>Automation workflows</li>
-      </ul>
+      <p>Nurture leads and retain customers with personalized email campaigns that deliver value and drive engagement.</p>
     </div>
 
     <div class="service-card">
-      <span class="service-icon">✍️</span>
-      <h3>Content Marketing</h3>
-      <p>Tell your story with compelling content that educates and inspires.</p>
-      <ul class="service-list">
-        <li>Blog writing & strategy</li>
-        <li>Video content creation</li>
-        <li>Infographics & visuals</li>
-        <li>Content calendar planning</li>
-      </ul>
+      <span class="service-icon">📊</span>
+      <h3>Analytics & Reporting</h3>
+      <p>Make data-driven decisions with comprehensive analytics, insights, and monthly performance reports.</p>
     </div>
 
     <div class="service-card">
       <span class="service-icon">🎨</span>
-      <h3>Brand Identity</h3>
-      <p>Create a memorable brand that resonates with your target audience.</p>
-      <ul class="service-list">
-        <li>Logo & visual identity</li>
-        <li>Brand strategy & guidelines</li>
-        <li>Marketing collateral</li>
-        <li>Brand positioning</li>
-      </ul>
+      <h3>Content Creation</h3>
+      <p>Compelling graphics, videos, and copy that resonate with your audience and strengthen your brand identity.</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="section">
-  <h2 class="section-title">Why Choose Our Digital Marketing?</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-icon">📊</span>
-      <h3>Data-Driven</h3>
-      <p>Every decision backed by analytics and performance metrics</p>
-    </div>
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Grow with Reevix?</h2>
+  <p>Let's build a digital strategy aligned with your brand vision and business goals.</p>
+  <a href="contact.html" class="btn">Get Started Today</a>
+</section>
 
-    <div class="feature-card">
-      <span class="feature-icon">🚀</span>
-      <h3>Results-Focused</h3>
-      <p>Strategies designed to achieve your specific business goals</p>
-    </div>
-
-    <div class="feature-card">
-      <span class="feature-icon">💡</span>
-      <h3>Creative Excellence</h3>
-      <p>Innovative campaigns that capture attention and drive action</p>
-    </div>
-
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <h3>Fast Execution</h3>
-      <p>Quick turnaround without compromising on quality</p>
-    </div>
-  </div>
-</div>
-
-<div class="cta-section">
-  <h2>Ready to Grow Your Digital Presence?</h2>
-  <p>Let's create a customized digital marketing strategy that drives real results for your business.</p>
-  <button class="btn" onclick="window.open('https://wa.me/917878466866?text=Hi%20Reevix!%20I%27d%20like%20to%20discuss%20digital%20marketing%20services.', '_blank')">Get Started Today</button>
-</div>
-
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">REEVIX</div>
-  <p>Transforming digital landscapes with innovative marketing solutions.</p>
-  <p style="margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
+  <p>The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
+  <p style="margin-top:24px; color:#999;">© 2024 Reevix. All rights reserved.</p>
 </footer>
 
 <script>
-window.addEventListener('scroll', function() {
-  const navbar = document.getElementById('navbar');
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar')
+    .classList.toggle('scrolled', window.scrollY > 50);
 });
 </script>
 
