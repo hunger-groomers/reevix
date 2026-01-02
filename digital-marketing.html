@@ -17,18 +17,17 @@
 html, body {
   font-family: 'Inter', sans-serif;
   color: #111;
-  background: #ffffff;
   scroll-behavior: smooth;
 }
 
-/* NAVBAR - Matching index.html style */
+/* ================= NAVBAR (EXACT MATCH TO INDEX.HTML) ================= */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
   transition: all 0.3s ease;
 }
 
@@ -38,25 +37,30 @@ html, body {
 }
 
 .nav-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
-  padding: 18px 40px;
+  padding: 18px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #1f4fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
   text-decoration: none;
-  letter-spacing: 1px;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 28px;
   list-style: none;
 }
 
@@ -64,18 +68,16 @@ html, body {
   text-decoration: none;
   font-weight: 500;
   color: #222;
+  cursor: pointer;
   position: relative;
+  padding: 8px 0;
   transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #1f4fff;
 }
 
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -6px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
@@ -83,52 +85,137 @@ html, body {
   transition: width 0.3s ease;
 }
 
+.nav-links a:hover {
+  color: #1f4fff;
+}
+
 .nav-links a:hover::after {
   width: 100%;
 }
 
-.nav-links a.active {
-  color: #1f4fff;
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* HERO */
-.hero-section {
-  padding: 180px 40px 120px;
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media (max-width: 900px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 79, 255, 0.25),
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
   text-align: center;
-  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+  padding: 60px 20px;
+  max-width: 900px;
 }
 
-.page-title {
-  font-size: clamp(3rem, 8vw, 5rem);
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 4.8rem);
   font-weight: 900;
-  background: linear-gradient(135deg, #1f4fff, #0066ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1f4fff;
+  text-shadow: 0 4px 20px rgba(31, 79, 255, 0.3);
   margin-bottom: 24px;
 }
 
-.page-subtitle {
-  max-width: 850px;
-  margin: 0 auto;
+.hero p {
   font-size: 1.3rem;
-  line-height: 1.8;
-  color: #555;
+  line-height: 1.6;
+  color: #222;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* SECTIONS */
+.btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 40px;
+  background: #1f4fff;
+  color: #fff;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(31,79,255,0.4);
+}
+
+/* ================= SECTIONS ================= */
 .section {
-  padding: 100px 40px;
-  max-width: 1400px;
+  padding: 120px 20px;
+  background: #ffffff;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
   margin: auto;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title {
   text-align: center;
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
-  background: linear-gradient(135deg, #1f4fff, #0066ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1f4fff;
   margin-bottom: 20px;
 }
 
@@ -141,135 +228,174 @@ html, body {
   font-size: 1.1rem;
 }
 
-/* SERVICES */
+/* ================= SERVICES GRID ================= */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   margin-top: 60px;
 }
 
 .service-card {
-  padding: 45px;
-  border-radius: 24px;
-  background: rgba(31,79,255,0.03);
-  border: 2px solid rgba(31,79,255,0.1);
-  transition: all 0.4s ease;
+  padding: 50px 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.05) 0%, rgba(255, 217, 61, 0.05) 100%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
 }
 
 .service-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 25px 60px rgba(31,79,255,0.2);
-  border-color: rgba(31,79,255,0.3);
+  transform: translateY(-20px) scale(1.05);
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  box-shadow: 0 25px 70px rgba(31, 79, 255, 0.35);
+  border-color: rgba(255,255,255,0.2);
 }
 
 .service-icon {
   font-size: 3.5rem;
   margin-bottom: 20px;
   display: block;
+  transition: all 0.5s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.15);
 }
 
 .service-card h3 {
   font-size: 1.6rem;
   margin-bottom: 14px;
   color: #111;
+  font-weight: 700;
+  transition: all 0.5s ease;
+}
+
+.service-card:hover h3 {
+  color: #ffffff;
 }
 
 .service-card p {
   color: #666;
   line-height: 1.7;
   font-size: 1.05rem;
+  transition: all 0.5s ease;
 }
 
-/* CTA */
+.service-card:hover p {
+  color: rgba(255,255,255,0.95);
+}
+
+/* ================= PARALLAX TEXT ================= */
+.parallax-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-text {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.15;
+  letter-spacing: -0.05em;
+}
+
+/* ================= CTA ================= */
 .cta-section {
-  margin: 80px 40px;
-  padding: 100px 40px;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
+  padding: 100px 20px;
   text-align: center;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #1f4fff, #0066ff);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.3); opacity: 0.2; }
 }
 
 .cta-section h2 {
-  font-size: 3rem;
-  color: #fff;
-  margin-bottom: 20px;
-  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
 }
 
-.cta-section p {
-  max-width: 700px;
-  margin: 0 auto 40px;
-  color: rgba(255,255,255,0.95);
-  font-size: 1.25rem;
-  line-height: 1.7;
-}
-
-.btn {
-  padding: 18px 50px;
-  border-radius: 50px;
-  background: #fff;
+.cta-section .btn {
+  background: #ffffff;
   color: #1f4fff;
-  font-size: 1.15rem;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
+  position: relative;
+  z-index: 1;
 }
 
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-/* FOOTER */
-.footer {
-  padding: 70px 40px;
-  text-align: center;
-  border-top: 2px solid rgba(31,79,255,0.1);
-  background: #fafbff;
-}
-
-.footer-logo {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #1f4fff;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
-}
-
-.footer p {
-  color: #666;
-  line-height: 1.8;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .nav-links { 
-    display: none; 
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
   }
-  
-  .nav-container {
-    padding: 18px 24px;
-  }
-  
-  .section { 
-    padding: 60px 20px; 
-  }
-  
-  .hero-section {
-    padding: 140px 20px 80px;
-  }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
-  
-  .cta-section {
-    margin: 40px 20px;
-    padding: 60px 30px;
+
+  .section {
+    padding: 80px 20px;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding-top: 60px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .parallax-text {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .parallax-text {
+    font-size: 3rem;
   }
 }
 </style>
@@ -277,91 +403,143 @@ html, body {
 
 <body>
 
-<!-- NAVBAR - Consistent with index.html -->
+<!-- NAVBAR - EXACT MATCH TO INDEX.HTML -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
     <a href="index.html" class="logo">REEVIX</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="digital-marketing.html" class="active">Digital</a></li>
-      <li><a href="printing.html">Printing</a></li>
-      <li><a href="3d.html">3D</a></li>
+      <li><a href="digital-marketing.html">Digital</a></li>
+      <li><a href="printing-production.html">Printing</a></li>
+      <li><a href="3d-animation.html">3D</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero-section">
-  <h1 class="page-title">Digital Marketing</h1>
-  <p class="page-subtitle">
-    Amplify your brand's voice across every digital channel. From strategy to execution, we transform your online presence into a powerful growth engine.
-  </p>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <h1>Digital Marketing</h1>
+    <p>Amplify your brand's voice across every digital channel. From strategy to execution, we transform your online presence into a powerful growth engine.</p>
+    <a class="btn" href="#services">Explore Services</a>
+  </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section">
-  <h2 class="section-title">Our Digital Marketing Services</h2>
-  <p class="section-description">Comprehensive solutions designed to elevate your brand and drive measurable results</p>
+<section class="section reveal" id="services">
+  <div class="container">
+    <h2 class="section-title">Our Digital Marketing Services</h2>
+    <p class="section-description">Comprehensive solutions designed to elevate your brand and drive measurable results</p>
 
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="service-icon">📱</span>
-      <h3>Social Media Management</h3>
-      <p>Build authentic connections and grow your audience across all major platforms with strategic content and community engagement.</p>
-    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">📱</span>
+        <h3>Social Media</h3>
+        <p>Build authentic connections and grow your audience across all major platforms with strategic content.</p>
+      </div>
 
-    <div class="service-card">
-      <span class="service-icon">🎯</span>
-      <h3>Paid Advertising</h3>
-      <p>Performance-driven ad campaigns across Google, Facebook, Instagram, and LinkedIn that maximize ROI and drive conversions.</p>
-    </div>
+      <div class="service-card">
+        <span class="service-icon">🎯</span>
+        <h3>Paid Advertising</h3>
+        <p>Performance-driven ad campaigns that maximize ROI and drive conversions across all channels.</p>
+      </div>
 
-    <div class="service-card">
-      <span class="service-icon">🔍</span>
-      <h3>SEO Optimization</h3>
-      <p>Boost your organic visibility and rank higher in search results with comprehensive on-page and off-page optimization strategies.</p>
-    </div>
+      <div class="service-card">
+        <span class="service-icon">🔍</span>
+        <h3>SEO</h3>
+        <p>Boost organic visibility and rank higher in search results with comprehensive optimization strategies.</p>
+      </div>
 
-    <div class="service-card">
-      <span class="service-icon">✉️</span>
-      <h3>Email Marketing</h3>
-      <p>Nurture leads and retain customers with personalized email campaigns that deliver value and drive engagement.</p>
-    </div>
+      <div class="service-card">
+        <span class="service-icon">✉️</span>
+        <h3>Email Marketing</h3>
+        <p>Nurture leads and retain customers with personalized campaigns that deliver value and engagement.</p>
+      </div>
 
-    <div class="service-card">
-      <span class="service-icon">📊</span>
-      <h3>Analytics & Reporting</h3>
-      <p>Make data-driven decisions with comprehensive analytics, insights, and monthly performance reports.</p>
-    </div>
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <h3>Analytics</h3>
+        <p>Make data-driven decisions with comprehensive analytics, insights, and performance reports.</p>
+      </div>
 
-    <div class="service-card">
-      <span class="service-icon">🎨</span>
-      <h3>Content Creation</h3>
-      <p>Compelling graphics, videos, and copy that resonate with your audience and strengthen your brand identity.</p>
+      <div class="service-card">
+        <span class="service-icon">🎨</span>
+        <h3>Content Creation</h3>
+        <p>Compelling graphics, videos, and copy that resonate with your audience and strengthen your brand.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <h2>Ready to Grow with Reevix?</h2>
-  <p>Let's build a digital strategy aligned with your brand vision and business goals.</p>
-  <a href="contact.html" class="btn">Get Started Today</a>
+<!-- PARALLAX -->
+<section class="parallax-section reveal">
+  <div class="parallax-text" id="parallaxText">AMPLIFY</div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-logo">REEVIX</div>
-  <p>The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
-  <p style="margin-top:24px; color:#999;">© 2024 Reevix. All rights reserved.</p>
-</footer>
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <h2>Ready to Transform Your Business?</h2>
+    <a class="btn" href="contact.html">Get Started</a>
+  </div>
+</section>
 
 <script>
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Scroll reveal animation
+function reveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  
+  reveals.forEach(element => {
+    const windowHeight = window.innerHeight;
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 100;
+    
+    if (elementTop < windowHeight - elementVisible) {
+      element.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', reveal);
+reveal();
+
+// Parallax text effect
 window.addEventListener('scroll', () => {
-  document.getElementById('navbar')
-    .classList.toggle('scrolled', window.scrollY > 50);
+  const text = document.getElementById('parallaxText');
+  
+  if (text) {
+    const textTop = text.getBoundingClientRect().top;
+    const textOffset = (window.innerHeight - textTop) * 0.15;
+    text.style.transform = `translateX(${textOffset}px)`;
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
 });
 </script>
 
