@@ -1,526 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reevix – Digital Marketing Excellence</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>REEVIX — Business Catalyst</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
+/* ================= RESET ================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    background: #ffffff;
+html, body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  color: #111;
 }
 
 /* ================= NAVBAR ================= */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(20px);
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(31, 79, 255, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar.scrolled {
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-    letter-spacing: -1px;
-}
-
-.logo:hover {
-    transform: scale(1.05);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1f4fff;
 }
 
 .nav-links {
-    display: flex;
-    gap: 35px;
-    list-style: none;
+  display: flex;
+  gap: 28px;
+  list-style: none;
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    position: relative;
-    padding: 8px 0;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+  color: #222;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #1f4fff, #0066ff);
-    transition: width 0.3s ease;
-    border-radius: 3px;
-}
-
-.nav-links a:hover {
-    color: #1f4fff;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
-
-.menu-toggle span {
-    width: 28px;
-    height: 3px;
-    background: #1f4fff;
-    transition: 0.3s;
-    border-radius: 3px;
-}
-
-/* ================= HERO SECTION ================= */
+/* ================= HERO ================= */
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* background image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("assets/fact-bg.jpg") center / cover no-repeat;
+  transform: scale(1.05);
+  will-change: transform;
 }
 
-/* Floating shapes */
-.shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.3;
-    animation: float 20s infinite ease-in-out;
+/* soft overlay for readability */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.15)
+  );
 }
 
-.shape1 {
-    width: 400px;
-    height: 400px;
-    background: rgba(255, 217, 61, 0.4);
-    top: -100px;
-    left: -100px;
-    animation-delay: 0s;
-}
-
-.shape2 {
-    width: 350px;
-    height: 350px;
-    background: rgba(255, 255, 255, 0.3);
-    bottom: -100px;
-    right: -100px;
-    animation-delay: 5s;
-}
-
-.shape3 {
-    width: 300px;
-    height: 300px;
-    background: rgba(0, 102, 255, 0.3);
-    top: 50%;
-    left: 50%;
-    animation-delay: 10s;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(50px, -50px) rotate(120deg); }
-    66% { transform: translate(-50px, 50px) rotate(240deg); }
-}
-
+/* hero content */
 .hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 900px;
-    padding: 40px 30px;
-    animation: fadeInUp 1s ease-out;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero-inner {
+  max-width: 720px;
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 25px;
-    letter-spacing: -2px;
-    text-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    line-height: 1.1;
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: #1f4fff; /* complements yellow */
+  letter-spacing: 1px;
 }
 
 .hero p {
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
-    color: rgba(255,255,255,0.95);
-    line-height: 1.7;
-    margin-bottom: 40px;
-    font-weight: 500;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #222;
 }
 
 .btn {
-    display: inline-block;
-    padding: 18px 45px;
-    background: #ffffff;
-    color: #1f4fff;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(31, 79, 255, 0.2), transparent);
-    transition: left 0.6s ease;
-}
-
-.btn:hover::before {
-    left: 100%;
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 40px;
+  background: #1f4fff;
+  color: #fff;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    animation: bounce 2s infinite;
-}
-
-.scroll-indicator span {
-    display: block;
-    width: 30px;
-    height: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 20px;
-    position: relative;
-}
-
-.scroll-indicator span::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    background: #ffffff;
-    border-radius: 50%;
-    transform: translateX(-50%);
-    animation: scrollDown 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
-}
-
-@keyframes scrollDown {
-    0% { opacity: 1; top: 10px; }
-    100% { opacity: 0; top: 30px; }
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(31,79,255,0.35);
 }
 
 /* ================= SECTIONS ================= */
 .section {
-    padding: 100px 30px;
-    background: #ffffff;
-}
-
-.section-alt {
-    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  padding: 120px 20px;
+  background: #ffffff;
 }
 
 .container {
-    max-width: 1200px;
-    margin: auto;
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* ================= STATS ================= */
 .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 50px;
-    text-align: center;
-}
-
-.stat {
-    padding: 40px 30px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, rgba(31, 79, 255, 0.05) 0%, rgba(255, 217, 61, 0.05) 100%);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.stat:hover {
-    transform: translateY(-15px);
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-    box-shadow: 0 20px 60px rgba(31, 79, 255, 0.3);
-    border-color: rgba(255,255,255,0.2);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  text-align: center;
 }
 
 .stat h2 {
-    font-size: clamp(2.8rem, 6vw, 3.5rem);
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 900;
-    margin-bottom: 15px;
-    transition: all 0.4s ease;
-}
-
-.stat:hover h2 {
-    -webkit-text-fill-color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f4fff;
 }
 
 .stat p {
-    color: #555;
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    font-weight: 600;
-    transition: all 0.4s ease;
-}
-
-.stat:hover p {
-    color: rgba(255,255,255,0.9);
+  margin-top: 10px;
+  color: #555;
 }
 
 /* ================= SERVICES ================= */
 .services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }
 
 .service {
-    padding: 50px 40px;
-    border-radius: 25px;
-    background: #ffffff;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    border: 2px solid rgba(31, 79, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.service::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.service:hover::before {
-    opacity: 1;
-}
-
-.service:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 70px rgba(31, 79, 255, 0.25);
-    border-color: transparent;
+  padding: 30px;
 }
 
 .service h3 {
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 3.5vw, 1.8rem);
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-    transition: all 0.4s ease;
-}
-
-.service:hover h3 {
-    -webkit-text-fill-color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f4fff;
 }
 
 .service p {
-    color: #666;
-    line-height: 1.8;
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
-    position: relative;
-    z-index: 1;
-    transition: all 0.4s ease;
-}
-
-.service:hover p {
-    color: rgba(255,255,255,0.9);
+  margin-top: 10px;
+  color: #555;
+  line-height: 1.6;
 }
 
 /* ================= CTA ================= */
 .cta {
-    text-align: center;
-    padding: 120px 30px;
-    background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.cta::before {
-    content: '';
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    top: -250px;
-    right: -250px;
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.1; }
-    50% { transform: scale(1.2); opacity: 0.2; }
+  text-align: center;
 }
 
 .cta h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 35px;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #111;
 }
 
-.cta .btn {
-    background: #ffffff;
-    color: #1f4fff;
-    position: relative;
-    z-index: 1;
+/* ================= REVEAL ANIMATION ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================= MOBILE ================= */
 @media (max-width: 900px) {
-    .nav-links {
-        display: none;
-    }
+  .stats,
+  .services {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-    .menu-toggle {
-        display: flex;
-    }
-
-    .hero {
-        min-height: 100vh;
-    }
-
-    .hero-content {
-        padding: 80px 20px;
-    }
-
-    .section {
-        padding: 60px 20px;
-    }
-
-    .cta {
-        padding: 80px 20px;
-    }
-
-    .scroll-indicator {
-        display: none;
-    }
-
-    .shape {
-        filter: blur(40px);
-    }
-}
-
-@media (max-width: 600px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .nav-container {
-        padding: 18px 20px;
-    }
-
-    .logo {
-        font-size: 1.5rem;
-    }
+  .hero-bg {
+    background-position: center top;
+  }
 }
 </style>
 </head>
@@ -528,104 +230,97 @@ body {
 <body>
 
 <nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <a href="#home" class="logo">REEVIX</a>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Digital</a></li>
-            <li><a href="#services">Printing</a></li>
-            <li><a href="#services">3D</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
+  <div class="nav-container">
+    <div class="logo">REEVIX</div>
+    <ul class="nav-links">
+      <li><a>Home</a></li>
+      <li><a>Digital</a></li>
+      <li><a>Printing</a></li>
+      <li><a>3D</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
-<section class="hero" id="home">
-    <div class="shape shape1"></div>
-    <div class="shape shape2"></div>
-    <div class="shape shape3"></div>
-    
-    <div class="hero-content">
-        <h1>REEVIX</h1>
-        <p>The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
-        <a href="#services" class="btn">Get Started</a>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
 
-    <div class="scroll-indicator">
-        <span></span>
+  <div class="hero-content">
+    <div class="hero-inner reveal">
+      <h1>REEVIX</h1>
+      <p>The Business Catalyst. Transforming Local Presence into Scalable Ecosystems.</p>
+      <a class="btn">Get Started</a>
     </div>
+  </div>
 </section>
 
+<!-- STATS -->
 <section class="section">
-    <div class="container stats">
-        <div class="stat">
-            <h2>50+</h2>
-            <p>Services</p>
-        </div>
-        <div class="stat">
-            <h2>24/7</h2>
-            <p>Support</p>
-        </div>
-        <div class="stat">
-            <h2>100%</h2>
-            <p>Custom</p>
-        </div>
+  <div class="container stats reveal">
+    <div class="stat">
+      <h2>50+</h2>
+      <p>Services</p>
     </div>
+    <div class="stat">
+      <h2>24/7</h2>
+      <p>Support</p>
+    </div>
+    <div class="stat">
+      <h2>100%</h2>
+      <p>Custom</p>
+    </div>
+  </div>
 </section>
 
-<section class="section section-alt" id="services">
-    <div class="container services">
-        <div class="service">
-            <h3>Digital Marketing</h3>
-            <p>Ads, branding & social media.</p>
-        </div>
-        <div class="service">
-            <h3>Printing & Production</h3>
-            <p>Banners, signage & packaging.</p>
-        </div>
-        <div class="service">
-            <h3>3D & Animation</h3>
-            <p>High-quality visual storytelling.</p>
-        </div>
+<!-- SERVICES -->
+<section class="section">
+  <div class="container services reveal">
+    <div class="service">
+      <h3>Digital Marketing</h3>
+      <p>Ads, branding & social media.</p>
     </div>
+    <div class="service">
+      <h3>Printing & Production</h3>
+      <p>Banners, signage & packaging.</p>
+    </div>
+    <div class="service">
+      <h3>3D & Animation</h3>
+      <p>High-quality visual storytelling.</p>
+    </div>
+  </div>
 </section>
 
-<section class="cta" id="contact">
-    <div class="container">
-        <h2>Ready to Transform Your Business?</h2>
-        <a href="#" class="btn">Get Started</a>
-    </div>
+<!-- CTA -->
+<section class="section cta">
+  <div class="container reveal">
+    <h2>Ready to Transform Your Business?</h2>
+    <a class="btn">Get Started</a>
+  </div>
 </section>
 
 <script>
-// Navbar scroll effect
-window.addEventListener('scroll', function() {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+/* Navbar scroll effect */
+window.addEventListener("scroll", () => {
+  const navbar = document.getElementById("navbar");
+  if (window.scrollY > 80) navbar.classList.add("scrolled");
+  else navbar.classList.remove("scrolled");
+
+  /* Parallax background */
+  const bg = document.getElementById("heroBg");
+  bg.style.transform = `translateY(${window.scrollY * 0.25}px) scale(1.05)`;
 });
 
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+/* Reveal animation */
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, { threshold: 0.15 });
+
+reveals.forEach(el => observer.observe(el));
 </script>
 
 </body>
