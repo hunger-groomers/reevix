@@ -126,11 +126,12 @@ html, body {
     position: absolute;
     inset: 0;
     background-image: url("assets/fact-bg.jpg");
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
     will-change: transform;
     transform: translateY(0);
+    background-color: #f5f5f5;
 }
 
 .hero-overlay {
@@ -420,8 +421,8 @@ html, body {
 
     .hero-bg {
         background-attachment: scroll;
-        background-size: cover;
-        background-position: center;
+        background-size: contain;
+        background-position: center center;
     }
 
     .hero-content {
@@ -447,7 +448,7 @@ html, body {
 /* Mobile portrait - ensure full image visibility */
 @media (max-width: 600px) {
     .hero-bg {
-        background-size: auto 100%;
+        background-size: contain;
         background-position: center center;
     }
 
@@ -629,7 +630,7 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(() => {
         // Force background recalculation on orientation change
         const bg = document.getElementById('heroBg');
-        bg.style.backgroundSize = window.innerWidth <= 600 ? 'auto 100%' : 'cover';
+        bg.style.backgroundSize = 'contain';
     }, 250);
 });
 </script>
