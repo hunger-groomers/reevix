@@ -396,6 +396,285 @@ html, body {
   will-change: transform;
 }
 
+/* ================= 3-GRID SERVICES ================= */
+.services-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ================= SPOTLIGHT STUDIO EXCLUSIVE ================= */
+.spotlight-exclusive {
+  padding: 140px 20px;
+  background: linear-gradient(135deg, #1a0a0a 0%, #3d0d0d 50%, #1a0a0a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated spotlight beams */
+.spotlight-exclusive::before,
+.spotlight-exclusive::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(220, 38, 38, 0.2), transparent);
+  animation: spotlightSweep 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.spotlight-exclusive::before {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.spotlight-exclusive::after {
+  right: 10%;
+  animation-delay: 4s;
+}
+
+@keyframes spotlightSweep {
+  0%, 100% { opacity: 0.3; transform: translateX(0) skewX(-12deg); }
+  50% { opacity: 0.6; transform: translateX(50px) skewX(-12deg); }
+}
+
+/* Floating particles in spotlight */
+.spotlight-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(220, 38, 38, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.spotlight-particle:nth-child(1) { left: 15%; top: 20%; animation: floatSpotlight 12s infinite; }
+.spotlight-particle:nth-child(2) { left: 85%; top: 30%; animation: floatSpotlight 15s infinite 2s; }
+.spotlight-particle:nth-child(3) { left: 45%; top: 60%; animation: floatSpotlight 18s infinite 4s; }
+.spotlight-particle:nth-child(4) { left: 70%; top: 80%; animation: floatSpotlight 14s infinite 6s; }
+
+@keyframes floatSpotlight {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  50% { transform: translateY(-80px) translateX(40px); }
+}
+
+.spotlight-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.spotlight-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.exclusive-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(220, 38, 38, 0.2);
+  border: 2px solid rgba(220, 38, 38, 0.4);
+  padding: 12px 28px;
+  border-radius: 50px;
+  margin-bottom: 30px;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(220, 38, 38, 0); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); }
+}
+
+.exclusive-badge svg {
+  width: 20px;
+  height: 20px;
+  color: #dc2626;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: rotate(180deg) scale(1.2); opacity: 0.7; }
+}
+
+.exclusive-badge span {
+  color: #fca5a5;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.spotlight-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 30px rgba(220, 38, 38, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.spotlight-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #fca5a5;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.spotlight-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.spotlight-visual {
+  position: relative;
+  perspective: 1000px;
+}
+
+.spotlight-card {
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.4) 0%, rgba(185, 28, 28, 0.3) 100%);
+  border: 2px solid rgba(220, 38, 38, 0.3);
+  border-radius: 30px;
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-card:hover {
+  transform: translateY(-15px) rotateX(5deg);
+  box-shadow: 0 30px 80px rgba(220, 38, 38, 0.4);
+  border-color: rgba(220, 38, 38, 0.6);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
+  transform: translateX(-50%);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.6; transform: translateX(-50%) scale(1.2); }
+}
+
+.spotlight-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.spotlight-card h3 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.spotlight-card p {
+  color: #fca5a5;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.spotlight-features {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.feature-item {
+  background: rgba(127, 29, 29, 0.3);
+  border-left: 4px solid #dc2626;
+  padding: 25px 30px;
+  border-radius: 15px;
+  transition: all 0.4s ease;
+}
+
+.feature-item:hover {
+  background: rgba(185, 28, 28, 0.4);
+  transform: translateX(10px);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
+}
+
+.feature-item h4 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.feature-item p {
+  color: #fca5a5;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.spotlight-cta {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.spotlight-btn {
+  display: inline-block;
+  padding: 18px 50px;
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  color: #ffffff;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(220, 38, 38, 0.4);
+}
+
+.spotlight-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.spotlight-btn:hover::before {
+  left: 100%;
+}
+
+.spotlight-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 60px rgba(220, 38, 38, 0.6);
+}
+
 /* ================= CTA ================= */
 .cta-section {
   background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
@@ -467,6 +746,24 @@ html, body {
     gap: 40px;
   }
 
+  .services-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .spotlight-content {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .spotlight-exclusive {
+    padding: 80px 20px;
+  }
+
+  .spotlight-header {
+    margin-bottom: 50px;
+  }
+
   .nav-links {
     display: none;
   }
@@ -518,6 +815,14 @@ html, body {
 
   .btn {
     padding: 12px 32px;
+    font-size: 1rem;
+  }
+
+  .spotlight-title {
+    font-size: 2rem;
+  }
+
+  .spotlight-subtitle {
     font-size: 1rem;
   }
 }
@@ -584,7 +889,7 @@ html, body {
 
 <section class="section reveal">
   <div class="container">
-    <div class="stats">
+    <div class="services-grid-3 stats">
       <a href="digital-marketing.html" style="text-decoration: none; color: inherit;">
         <div class="stat">
           <h2>Digital</h2>
@@ -609,6 +914,59 @@ html, body {
 
 <section class="parallax-section reveal">
   <div class="parallax-text" id="parallaxText2">TRANSFORM</div>
+</section>
+
+<!-- ================= SPOTLIGHT STUDIO EXCLUSIVE SECTION ================= -->
+<section class="spotlight-exclusive reveal">
+  <div class="spotlight-particle"></div>
+  <div class="spotlight-particle"></div>
+  <div class="spotlight-particle"></div>
+  <div class="spotlight-particle"></div>
+
+  <div class="spotlight-container">
+    <div class="spotlight-header">
+      <div class="exclusive-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+        <span>REEVIX Exclusive</span>
+      </div>
+      
+      <h2 class="spotlight-title">SPOTLIGHT STUDIO</h2>
+      <p class="spotlight-subtitle">Concept-Based Invitations That Command Attention & Create Unforgettable First Impressions</p>
+    </div>
+
+    <div class="spotlight-content">
+      <div class="spotlight-visual">
+        <div class="spotlight-card">
+          <div class="spotlight-icon">🎭</div>
+          <h3>The Stage Awaits</h3>
+          <p>Where every invitation becomes a performance and every event takes center stage</p>
+        </div>
+      </div>
+
+      <div class="spotlight-features">
+        <div class="feature-item">
+          <h4>🎨 Fully Customizable Designs</h4>
+          <p>Each concept tailored to your event's unique theme, tone, and audience. From literary gatherings to exclusive galas.</p>
+        </div>
+
+        <div class="feature-item">
+          <h4>✨ Concept-Driven Storytelling</h4>
+          <p>More than invitations—immersive experiences that build anticipation and set the perfect atmosphere.</p>
+        </div>
+
+        <div class="feature-item">
+          <h4>🎯 Premium Presentation</h4>
+          <p>Available in digital and print formats with professional finishing that reflects your event's caliber.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="spotlight-cta">
+      <a href="spotlight-studio.html" class="spotlight-btn">Enter Spotlight Studio</a>
+    </div>
+  </div>
 </section>
 
 <section class="cta-section reveal" id="cta">
