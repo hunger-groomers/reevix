@@ -1,719 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Animation & Mockups - Reevix</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3D Animation & Mockups — REEVIX</title>
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #ff0080 100%);
-            --dark-bg: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --neon-blue: #00f5ff;
-            --neon-pink: #ff0080;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
-            animation: backgroundFloat 20s ease-in-out infinite;
-        }
+html, body {
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  scroll-behavior: smooth;
+}
 
-        @keyframes backgroundFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
-        }
+/* ================= NAVBAR (EXACT MATCH TO INDEX.HTML) ================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
 
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
+.navbar.scrolled {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            opacity: 0;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(100px) rotate(360deg); opacity: 0; }
-        }
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1f4fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+.logo:hover {
+  transform: scale(1.05);
+}
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #222;
+  cursor: pointer;
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
 
-        .logo::before {
-            content: '';
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            animation: logoSpin 10s linear infinite;
-        }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1f4fff;
+  transition: width 0.3s ease;
+}
 
-        @keyframes logoSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+.nav-links a:hover {
+  color: #1f4fff;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--neon-blue);
-        }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            transition: width 0.3s ease;
-        }
+@media (max-width: 900px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+}
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 79, 255, 0.25),
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
 
-        .page-content {
-            min-height: 100vh;
-            padding-top: 120px;
-        }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 900px;
+}
 
-        .section {
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: #1f4fff;
+  text-shadow: 0 4px 20px rgba(31, 79, 255, 0.3);
+  margin-bottom: 24px;
+}
 
-        .page-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
+.hero p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #222;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-        @keyframes titleGlow {
-            0% { 
-                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
-                transform: scale(1);
-            }
-            100% { 
-                filter: drop-shadow(0 0 50px rgba(102, 126, 234, 0.8));
-                transform: scale(1.02);
-            }
-        }
+.btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 40px;
+  background: #1f4fff;
+  color: #fff;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
 
-        .page-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.3rem;
-            margin-bottom: 60px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out;
-        }
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.btn:hover::before {
+  left: 100%;
+}
 
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 30px;
-            padding: 60px;
-            margin: 60px 0;
-            border: 2px solid rgba(0, 245, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(31,79,255,0.4);
+}
 
-        .highlight-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent);
-            animation: rotateCTA 15s linear infinite;
-        }
+/* ================= SECTIONS ================= */
+.section {
+  padding: 120px 20px;
+  background: #ffffff;
+  position: relative;
+}
 
-        @keyframes rotateCTA {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
 
-        .highlight-box h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
-        }
+.reveal {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        .highlight-box p {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
+.section-title {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #1f4fff;
+  margin-bottom: 20px;
+}
 
-        .benefit-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
+.section-description {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 70px;
+  color: #666;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
 
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
+/* ================= BENEFITS GRID ================= */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
 
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
+.benefit-card {
+  padding: 50px 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.05) 0%, rgba(255, 217, 61, 0.05) 100%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
+}
 
-        .benefit-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
+.benefit-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  box-shadow: 0 25px 70px rgba(31, 79, 255, 0.35);
+  border-color: rgba(255,255,255,0.2);
+}
 
-        .benefit-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
+.benefit-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  display: block;
+  transition: all 0.5s ease;
+}
 
-        .pricing-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.15);
+}
 
-        .price-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.6s ease-out backwards;
-        }
+.benefit-card h4 {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  color: #111;
+  font-weight: 700;
+  transition: all 0.5s ease;
+}
 
-        .price-card:nth-child(1) { animation-delay: 0.1s; }
-        .price-card:nth-child(2) { animation-delay: 0.2s; }
-        .price-card:nth-child(3) { animation-delay: 0.3s; }
+.benefit-card:hover h4 {
+  color: #ffffff;
+}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.benefit-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  transition: all 0.5s ease;
+}
 
-        .price-card.featured {
-            border: 2px solid var(--neon-pink);
-            background: rgba(255, 0, 128, 0.08);
-        }
+.benefit-card:hover p {
+  color: rgba(255,255,255,0.95);
+}
 
-        .price-card.featured::after {
-            content: '✨ BEST VALUE';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--accent-gradient);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
+/* ================= PRICING CARDS ================= */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+}
 
-        .price-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
+.price-card {
+  padding: 50px 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(31, 79, 255, 0.05) 0%, rgba(255, 217, 61, 0.05) 100%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
+  position: relative;
+}
 
-        .price-card h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
+.price-card.featured {
+  border-color: #1f4fff;
+}
 
-        .price-card .price {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 20px 0;
-            animation: priceGlow 2s ease-in-out infinite;
-        }
+.price-card.featured::after {
+  content: '✨ BEST VALUE';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #1f4fff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 
-        @keyframes priceGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+.price-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  box-shadow: 0 25px 70px rgba(31, 79, 255, 0.35);
+  border-color: rgba(255,255,255,0.2);
+}
 
-        .price-card p {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-        }
+.price-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #111;
+  font-weight: 700;
+  transition: all 0.5s ease;
+}
 
-        .service-list {
-            list-style: none;
-            margin: 30px 0;
-            text-align: left;
-        }
+.price-card:hover h3 {
+  color: #ffffff;
+}
 
-        .service-list li {
-            padding: 10px 0;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 30px;
-        }
+.price-card .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f4fff;
+  margin: 16px 0;
+  display: block;
+  transition: all 0.5s ease;
+}
 
-        .service-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--neon-blue);
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
+.price-card:hover .price {
+  color: #FFD93D;
+}
 
-        .btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
+.price-card .subprice {
+  color: #ff0080;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  transition: all 0.5s ease;
+}
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
+.price-card:hover .subprice {
+  color: #FFD93D;
+}
 
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
+.price-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  transition: all 0.5s ease;
+  margin-bottom: 20px;
+}
 
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-            position: relative;
-            z-index: 1;
-        }
+.price-card:hover p {
+  color: rgba(255,255,255,0.95);
+}
 
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
-        }
+.service-list {
+  list-style: none;
+  margin: 30px 0;
+  text-align: left;
+}
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-        }
+.service-list li {
+  padding: 8px 0;
+  color: #666;
+  position: relative;
+  padding-left: 30px;
+  font-size: 0.95rem;
+  transition: all 0.5s ease;
+}
 
-        .whatsapp-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.5);
-        }
+.price-card:hover .service-list li {
+  color: rgba(255,255,255,0.9);
+}
 
-        .footer {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 80px;
-        }
+.service-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #1f4fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.5s ease;
+}
 
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-        }
+.price-card:hover .service-list li::before {
+  color: #FFD93D;
+}
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+.price-card .btn {
+  margin-top: 20px;
+  padding: 12px 32px;
+  font-size: 0.95rem;
+  background: #1f4fff;
+}
 
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
+.price-card:hover .btn {
+  background: #ffffff;
+  color: #1f4fff;
+}
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
-            border-radius: 5px;
-        }
+/* ================= PARALLAX TEXT ================= */
+.parallax-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  overflow: hidden;
+  position: relative;
+}
 
-        @media (max-width: 768px) {
-            .nav-container, .section {
-                padding: 0 20px;
-            }
-            
-            .highlight-box {
-                padding: 30px 20px;
-            }
-        }
-    </style>
+.parallax-text {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.15;
+  letter-spacing: -0.05em;
+}
+
+/* ================= CTA ================= */
+.cta-section {
+  background: linear-gradient(135deg, #1f4fff 0%, #0066ff 50%, #FFD93D 100%);
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+}
+
+.cta-section h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section p {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .btn {
+  background: #ffffff;
+  color: #1f4fff;
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #25d366;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+}
+
+.contact-info {
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-info p {
+  font-size: 1.05rem;
+  margin: 10px 0;
+}
+
+.contact-info a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #FFD93D;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .benefits-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .section {
+    padding: 80px 20px;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding-top: 60px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .parallax-text {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .parallax-text {
+    font-size: 3rem;
+  }
+
+  .whatsapp-btn {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+}
+</style>
 </head>
+
 <body>
-    <div class="background-animation"></div>
-    <div class="particles" id="particles"></div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo" onclick="window.location.href='index.html'">REEVIX</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="digital-marketing.html">Digital Marketing</a></li>
-                <li><a href="printing-production.html">Printing & Production</a></li>
-                <li><a href="3d-animation.html" class="active">3D & Animation</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<!-- NAVBAR - EXACT MATCH TO INDEX.HTML -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">REEVIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="digital-marketing.html">Digital</a></li>
+      <li><a href="printing-production.html">Printing</a></li>
+      <li><a href="3d-animation.html">3D</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="page-content">
-        <div class="section">
-            <h1 class="page-title">3D Animation & Product Mockups</h1>
-            <p class="page-subtitle">Elevate your brand with dynamic 3D clips and photorealistic product mockups—perfect for social media, ads, and in-store visuals</p>
-            
-            <div class="highlight-box">
-                <h2>Why Choose 3D Animation & Mockups?</h2>
-                <p>Stand out in crowded feeds with smooth motion graphics and polished visualizations that capture immediate attention</p>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">⚡</div>
-                        <h4>Attention Grabbing</h4>
-                        <p>Stand out in crowded feeds with smooth motion and polished mockups</p>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🎯</div>
-                        <h4>Versatile Usage</h4>
-                        <p>Perfect for social reels, website banners, digital signage, and packaging previews</p>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🚀</div>
-                        <h4>No Photo Shoot Needed</h4>
-                        <p>All work created digitally—fast turnaround, consistent quality, no scheduling headaches</p>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="benefit-icon">💎</div>
-                        <h4>Photorealistic Quality</h4>
-                        <p>High-resolution outputs that look indistinguishable from real photography</p>
-                    </div>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <h1>3D Animation & Mockups</h1>
+    <p>Elevate your brand with dynamic 3D clips and photorealistic product mockups — perfect for social media, ads, and in-store visuals.</p>
+    <a class="btn" href="#services">Explore Services</a>
+  </div>
+</section>
 
-            <h2 style="text-align: center; font-size: 2.5rem; margin: 80px 0 40px; color: var(--text-primary);">What You Get</h2>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎬</div>
-                    <h4>15-20 sec 3D Animation</h4>
-                    <p>Professional animated clips with smooth transitions and eye-catching effects</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📸</div>
-                    <h4>Photorealistic Mockups</h4>
-                    <p>High-resolution PNG mockups that look like real product photography</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔄</div>
-                    <h4>Two Rounds of Revisions</h4>
-                    <p>Fine-tune assets until they perfectly match your vision</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📱</div>
-                    <h4>HD Exports</h4>
-                    <p>MP4/WebM for videos + PNG for mockups, optimized for all platforms</p>
-                </div>
-            </div>
+<!-- WHY CHOOSE -->
+<section class="section reveal" id="services">
+  <div class="container">
+    <h2 class="section-title">Why Choose 3D Animation & Mockups?</h2>
+    <p class="section-description">Stand out with smooth motion graphics and polished visualizations that capture immediate attention</p>
 
-            <h2 style="text-align: center; font-size: 2.5rem; margin: 80px 0 40px; color: var(--text-primary);">Pricing Options</h2>
-            
-            <div class="pricing-options">
-                <div class="price-card">
-                    <h3>3D Animation Clip</h3>
-                    <div class="price">₹20,000</div>
-                    <p style="margin-bottom: 30px;">Professional 3D animated video</p>
-                    <ul class="service-list">
-                        <li>15-20 second duration</li>
-                        <li>Custom animation</li>
-                        <li>Smooth transitions</li>
-                        <li>HD export (MP4/WebM)</li>
-                        <li>Two rounds of revisions</li>
-                        <li>Optimized for social media</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Order Now</button>
-                </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">⚡</span>
+        <h4>Attention Grabbing</h4>
+        <p>Stand out in crowded feeds with smooth motion and polished mockups that stop the scroll</p>
+      </div>
 
-                <div class="price-card">
-                    <h3>Product Mockup</h3>
-                    <div class="price">₹5,000</div>
-                    <p style="margin-bottom: 30px;">Photorealistic product visualization</p>
-                    <ul class="service-list">
-                        <li>1 product mockup</li>
-                        <li>Photorealistic rendering</li>
-                        <li>High-resolution PNG</li>
-                        <li>Custom backgrounds</li>
-                        <li>Two rounds of revisions</li>
-                        <li>Print-ready quality</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Order Now</button>
-                </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🎯</span>
+        <h4>Versatile Usage</h4>
+        <p>Perfect for social reels, website banners, digital signage, and packaging previews</p>
+      </div>
 
-                <div class="price-card featured">
-                    <h3>Bundle Deal</h3>
-                    <div class="price">₹22,499</div>
-                    <p style="color: var(--neon-pink); font-weight: 600; margin-bottom: 10px;">Save ₹2,501!</p>
-                    <p style="margin-bottom: 30px;">Animation + Mockup package</p>
-                    <ul class="service-list">
-                        <li>1× 15-20 sec 3D animation</li>
-                        <li>1× Photorealistic mockup</li>
-                        <li>HD exports for both</li>
-                        <li>Two rounds of revisions each</li>
-                        <li>Priority support</li>
-                        <li>Fastest turnaround</li>
-                    </ul>
-                    <button class="btn btn-primary" style="margin-top: 20px;">Get Bundle</button>
-                </div>
-            </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🚀</span>
+        <h4>No Photo Shoot Needed</h4>
+        <p>All work created digitally—fast turnaround, consistent quality, no scheduling headaches</p>
+      </div>
 
-            <div style="text-align: center; margin: 80px 0;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 30px; color: var(--text-primary);">Ready to Create Something Amazing?</h2>
-                <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 40px;">Contact us to discuss your 3D animation and mockup needs</p>
-                <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'm%20interested%20in%20your%203D%20animation%20and%20mockup%20services." class="whatsapp-btn" target="_blank">
-                    <span style="font-size: 1.5rem;">📱</span> Chat on WhatsApp
-                </a>
-                <div style="margin-top: 40px;">
-                    <p style="font-size: 1.1rem; margin-bottom: 15px; color: var(--text-secondary);"><strong>📧 Email:</strong> <a href="mailto:reevix.in@gmail.com" style="color: var(--neon-blue); text-decoration: none;">reevix.in@gmail.com</a></p>
-                    <p style="font-size: 1.1rem; color: var(--text-secondary);"><strong>📞 Call:</strong> 
-                        <a href="tel:+917878466866" style="color: var(--neon-blue); text-decoration: none;">+91 7878466866</a> | 
-                        <a href="tel:+918619891911" style="color: var(--neon-blue); text-decoration: none;">+91 8619891911</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">💎</span>
+        <h4>Photorealistic Quality</h4>
+        <p>High-resolution outputs that look indistinguishable from real photography</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <footer class="footer">
-        <div class="footer-logo">REEVIX</div>
-        <p style="color: var(--text-secondary);">Transforming digital landscapes with innovative marketing solutions.</p>
-        <p style="color: var(--text-secondary); margin-top: 30px;">&copy; 2024 Reevix. All rights reserved.</p>
-    </footer>
+<!-- PARALLAX -->
+<section class="parallax-section reveal">
+  <div class="parallax-text" id="parallaxText">VISUALIZE</div>
+</section>
 
-    <script>
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            const particleCount = 60;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                const colors = ['#00f5ff', '#ff0080', '#667eea', '#764ba2'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = randomColor;
-                particle.style.boxShadow = `0 0 15px ${randomColor}`;
-                
-                particles.appendChild(particle);
-            }
-        }
+<!-- WHAT YOU GET -->
+<section class="section reveal">
+  <div class="container">
+    <h2 class="section-title">What You Get</h2>
+    <p class="section-description">Professional 3D assets delivered in high quality, ready to use across all platforms</p>
 
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">🎬</span>
+        <h4>15-20 sec 3D Animation</h4>
+        <p>Professional animated clips with smooth transitions and eye-catching effects</p>
+      </div>
 
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('click', function() {
-                const serviceName = this.closest('.price-card').querySelector('h3').textContent;
-                const price = this.closest('.price-card').querySelector('.price').textContent;
-                const whatsappMessage = `Hi Reevix! I'm interested in your ${serviceName} (${price}). Can you provide more details?`;
-                const whatsappUrl = `https://wa.me/+917878466866?text=${encodeURIComponent(whatsappMessage)}`;
-                window.open(whatsappUrl, '_blank');
-            });
-        });
+      <div class="benefit-card">
+        <span class="benefit-icon">📸</span>
+        <h4>Photorealistic Mockups</h4>
+        <p>High-resolution PNG mockups that look like real product photography</p>
+      </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-        });
-    </script>
+      <div class="benefit-card">
+        <span class="benefit-icon">🔄</span>
+        <h4>Two Rounds of Revisions</h4>
+        <p>Fine-tune assets until they perfectly match your vision</p>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-icon">📱</span>
+        <h4>HD Exports</h4>
+        <p>MP4/WebM for videos + PNG for mockups, optimized for all platforms</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section reveal" style="background: #f8f9ff;">
+  <div class="container">
+    <h2 class="section-title">Pricing Options</h2>
+    <p class="section-description">Choose the package that best fits your needs</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>3D Animation Clip</h3>
+        <span class="price">₹20,000</span>
+        <p>Professional 3D animated video</p>
+        <ul class="service-list">
+          <li>15-20 second duration</li>
+          <li>Custom animation</li>
+          <li>Smooth transitions</li>
+          <li>HD export (MP4/WebM)</li>
+          <li>Two rounds of revisions</li>
+          <li>Optimized for social media</li>
+        </ul>
+        <button class="btn" onclick="getQuote('3D Animation Clip', '₹20,000')">Order Now</button>
+      </div>
+
+      <div class="price-card">
+        <h3>Product Mockup</h3>
+        <span class="price">₹5,000</span>
+        <p>Photorealistic product visualization</p>
+        <ul class="service-list">
+          <li>1 product mockup</li>
+          <li>Photorealistic rendering</li>
+          <li>High-resolution PNG</li>
+          <li>Custom backgrounds</li>
+          <li>Two rounds of revisions</li>
+          <li>Print-ready quality</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Product Mockup', '₹5,000')">Order Now</button>
+      </div>
+
+      <div class="price-card featured">
+        <h3>Bundle Deal</h3>
+        <span class="price">₹22,499</span>
+        <span class="subprice">Save ₹2,501!</span>
+        <p>Animation + Mockup package</p>
+        <ul class="service-list">
+          <li>1× 15-20 sec 3D animation</li>
+          <li>1× Photorealistic mockup</li>
+          <li>HD exports for both</li>
+          <li>Two rounds of revisions each</li>
+          <li>Priority support</li>
+          <li>Fastest turnaround</li>
+        </ul>
+        <button class="btn" onclick="getQuote('Bundle Deal', '₹22,499')">Get Bundle</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <h2>Ready to Create Something Amazing?</h2>
+    <p>Contact us to discuss your 3D animation and mockup needs</p>
+    <a href="https://wa.me/+917878466866?text=Hi%20Reevix!%20I'm%20interested%20in%20your%203D%20services." class="whatsapp-btn" target="_blank">
+      <span style="font-size: 1.4rem;">📱</span> WhatsApp Us
+    </a>
+    <div class="contact-info">
+      <p>📧 Email: <a href="mailto:reevix.in@gmail.com">reevix.in@gmail.com</a></p>
+      <p>📞 Call: <a href="tel:+917878466866">+91 7878466866</a> | <a href="tel:+918619891911">+91 8619891911</a></p>
+    </div>
+  </div>
+</section>
+
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Scroll reveal animation
+function reveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  
+  reveals.forEach(element => {
+    const windowHeight = window.innerHeight;
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 100;
+    
+    if (elementTop < windowHeight - elementVisible) {
+      element.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', reveal);
+reveal();
+
+// Parallax text effect
+window.addEventListener('scroll', () => {
+  const text = document.getElementById('parallaxText');
+  
+  if (text) {
+    const textTop = text.getBoundingClientRect().top;
+    const textOffset = (window.innerHeight - textTop) * 0.15;
+    text.style.transform = `translateX(${textOffset}px)`;
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Get Quote function
+function getQuote(serviceName, price) {
+  const message = `Hi Reevix! I'm interested in your ${serviceName} (${price}). Can you provide more details?`;
+  const url = `https://wa.me/+917878466866?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+</script>
+
 </body>
 </html>
