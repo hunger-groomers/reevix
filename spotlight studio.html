@@ -1,0 +1,284 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+
+const SpotlightStudio = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  const designs = [
+    {
+      id: 1,
+      title: "Book Jam Read",
+      subtitle: "Literary Events",
+      description: "Perfect for book clubs, reading sessions, or literary gatherings. This design features a creative 'Sip, Jam, Read' concept with an elegant book illustration. The warm burgundy tones create an inviting atmosphere, while the Stephen King quote adds literary credibility.",
+      details: "Customizable with your event details, venue, and reading list. Ideal for creating an intimate, intellectual atmosphere.",
+      image: "https://i.ibb.co/GQf58kMg/community-13.png",
+      color: "from-red-900 to-red-800"
+    },
+    {
+      id: 2,
+      title: "Showcase",
+      subtitle: "Performance Events",
+      description: "Ideal for talent shows, open mic nights, comedy shows, or any performance event. The dramatic spotlight effect with microphone and stool creates anticipation and sets the stage.",
+      details: "The minimalist design puts focus on the performer, while the vintage-inspired color palette adds sophistication. Perfect for intimate studio performances.",
+      image: "https://i.ibb.co/RpkzczzS/Your-paragraph-text-9.png",
+      color: "from-pink-900 to-pink-800"
+    },
+    {
+      id: 3,
+      title: "The Stage Awaits",
+      subtitle: "Auditions & Showcases",
+      description: "Powerful invitation for auditions, talent searches, or performance opportunities. The lone microphone in the spotlight symbolizes the moment before performance.",
+      details: "Bold, confident design that speaks to aspiring performers. Perfect for casting calls, open auditions, or showcase events.",
+      image: "https://i.ibb.co/SXPVTfsh/2.png",
+      color: "from-red-800 to-red-700"
+    },
+    {
+      id: 4,
+      title: "Work-Life Balance",
+      subtitle: "Professional Events",
+      description: "Perfect for workshops, seminars, or corporate events focused on wellness and balance. The clever visual metaphor of the tilting Ctrl key represents the modern struggle.",
+      details: "Clean, professional design with a bold message. Ideal for HR events, wellness programs, or motivational talks.",
+      image: "https://i.ibb.co/zVnNDpgx/work-life-balance.png",
+      color: "from-cyan-700 to-cyan-600"
+    },
+    {
+      id: 5,
+      title: "Coffee Culture",
+      subtitle: "Casual Meetups",
+      description: "Designed for coffee tastings, casual networking events, or informal gatherings. The vibrant yellow spotlight draws attention to your featured beverage or theme.",
+      details: "Modern, energetic design with photographic elements creates a contemporary feel. Great for cafes, pop-ups, or brand activations.",
+      image: "https://i.ibb.co/spx1shmD/coffee.png",
+      color: "from-yellow-700 to-yellow-600"
+    },
+    {
+      id: 6,
+      title: "Elegant Minimalism",
+      subtitle: "Premium Events",
+      description: "Sophisticated design for high-end events, product launches, or exclusive gatherings. The tuxedo-inspired spotlight creates instant recognition of formal elegance.",
+      details: "Minimalist aesthetic with maximum impact. Ideal for galas, premieres, or luxury brand events.",
+      image: "https://i.ibb.co/4ZH2hbM6/55418ccc-b27c-407f-9845-0864e9471c62.jpg",
+      color: "from-slate-800 to-slate-700"
+    },
+    {
+      id: 7,
+      title: "Ice Coffee Delight",
+      subtitle: "Food & Beverage Events",
+      description: "Eye-catching design for product launches, menu promotions, or food festival announcements. The vibrant photography and bold typography create immediate appetite appeal.",
+      details: "Perfect for restaurants, cafes, and food brands looking to make a splash. Combines professional food photography with modern design aesthetics.",
+      image: "https://i.ibb.co/Y7rtZ6Ry/Ice-coffee-Social-Media-Ads-Post-Design.jpg",
+      color: "from-blue-900 to-blue-800"
+    }
+  ];
+
+  const goToNext = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prev) => (prev + 1) % designs.length);
+      setTimeout(() => setIsAnimating(false), 600);
+    }
+  };
+
+  const goToPrev = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prev) => (prev - 1 + designs.length) % designs.length);
+      setTimeout(() => setIsAnimating(false), 600);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'ArrowLeft') goToPrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAnimating]);
+
+  const currentDesign = designs[currentIndex];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-950 via-red-900 to-black overflow-hidden">
+      {/* Animated spotlight beams */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-full bg-gradient-to-b from-red-400/20 via-red-500/10 to-transparent transform -skew-x-12 animate-pulse"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-full bg-gradient-to-b from-red-400/20 via-red-500/10 to-transparent transform skew-x-12 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
+
+      {/* Header */}
+      <div className="relative z-20 container mx-auto px-4 pt-12">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 bg-red-500/20 px-6 py-2 rounded-full mb-6 backdrop-blur-sm border border-red-500/30">
+            <Sparkles className="w-5 h-5 text-red-300" />
+            <span className="text-red-200 font-medium">Presented by REEVIX</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white tracking-tight">
+            SPOTLIGHT STUDIO
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-red-200 max-w-3xl mx-auto">
+            Concept-Based Invitations That Command Attention
+          </p>
+        </div>
+      </div>
+
+      {/* Main Carousel Section */}
+      <div className="relative z-10 container mx-auto px-4 py-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+          
+          {/* Left Side - Image with Spotlight Effect */}
+          <div className="relative flex items-center justify-center">
+            {/* Spotlight cone effect */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[800px] bg-gradient-to-b from-white/30 via-red-300/20 to-transparent blur-3xl"></div>
+            
+            {/* Main image container */}
+            <div 
+              className={`relative transition-all duration-700 ease-out ${
+                isAnimating ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
+              }`}
+            >
+              <div className={`w-[400px] h-[560px] bg-gradient-to-br ${currentDesign.color} rounded-3xl shadow-2xl shadow-black/50 relative overflow-hidden`}>
+                {/* Spotlight beam overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/30 z-10"></div>
+                
+                {/* Portfolio Image */}
+                <img 
+                  src={currentDesign.image} 
+                  alt={currentDesign.title}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Design label */}
+                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full z-20">
+                  <span className="text-red-900 font-bold text-sm">{currentDesign.subtitle}</span>
+                </div>
+              </div>
+
+              {/* Counter indicator */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-red-950/80 backdrop-blur-sm px-6 py-2 rounded-full border border-red-500/30">
+                <span className="text-red-200 font-medium">
+                  {currentIndex + 1} / {designs.length}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Content */}
+          <div 
+            className={`space-y-6 transition-all duration-700 ease-out ${
+              isAnimating ? 'translate-x-12 opacity-0' : 'translate-x-0 opacity-100'
+            }`}
+          >
+            <div>
+              <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                {currentDesign.title}
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-transparent mb-6"></div>
+            </div>
+
+            <p className="text-xl text-red-100 leading-relaxed">
+              {currentDesign.description}
+            </p>
+
+            <p className="text-lg text-red-200/80 leading-relaxed">
+              {currentDesign.details}
+            </p>
+
+            {/* How it works box */}
+            <div className="bg-gradient-to-r from-red-950/60 to-red-900/40 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6 mt-8">
+              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-red-400" />
+                How This Becomes Your Invitation
+              </h3>
+              <ul className="space-y-3 text-red-200">
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl">→</span>
+                  <span>Customize all colors, text, and design elements to match your event theme</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl">→</span>
+                  <span>Add your event details, venue information, date, and time</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl">→</span>
+                  <span>Include your branding, logos, or personal creative touches</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400 text-xl">→</span>
+                  <span>Available in both digital and premium print formats</span>
+                </li>
+              </ul>
+            </div>
+
+            <button className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 mt-6">
+              Customize This Design
+            </button>
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <div className="flex items-center justify-center gap-8 mt-16">
+          <button
+            onClick={goToPrev}
+            disabled={isAnimating}
+            className="group relative w-16 h-16 bg-red-950/60 hover:bg-red-900/80 backdrop-blur-sm border border-red-500/30 rounded-full transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-8 h-8 text-red-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:text-white transition-colors" />
+          </button>
+
+          <div className="text-red-300 font-medium">
+            Slide to explore designs
+          </div>
+
+          <button
+            onClick={goToNext}
+            disabled={isAnimating}
+            className="group relative w-16 h-16 bg-red-950/60 hover:bg-red-900/80 backdrop-blur-sm border border-red-500/30 rounded-full transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-8 h-8 text-red-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:text-white transition-colors" />
+          </button>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {designs.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (!isAnimating) {
+                  setIsAnimating(true);
+                  setCurrentIndex(index);
+                  setTimeout(() => setIsAnimating(false), 600);
+                }
+              }}
+              className={`transition-all duration-300 rounded-full ${
+                index === currentIndex 
+                  ? 'w-12 h-3 bg-red-500' 
+                  : 'w-3 h-3 bg-red-500/30 hover:bg-red-500/50'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom CTA */}
+      <div className="relative z-10 container mx-auto px-4 py-16">
+        <div className="text-center max-w-3xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Put Your Event in the Spotlight?
+          </h3>
+          <p className="text-red-200 text-lg mb-8">
+            Let's create an invitation that captures attention and sets the perfect tone for your gathering
+          </p>
+          <button className="bg-white text-red-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-red-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            Start Your Project
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SpotlightStudio;
